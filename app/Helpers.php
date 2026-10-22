@@ -32,4 +32,29 @@ class Helpers {
     public static function sanitize(string $input): string {
         return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
     }
+
+    public static function generateUniqueSlug(PDO $db, string $table, string $titleOrSlug, ?int $ignoreId = null): string {
+        $clean = strtolower($titleOrSlug);
+        $slug = trim(preg_replace('/[^a-z0-9-]+/', '-', $clean), '-');
+        if (empty($slug)) $slug = 'item';
+
+        $baseSlug = $slug;
+        $counter = 1;
+
+        while (true) {
+            $testSlug = ($counter === 1) ? $baseSlug : $baseSlug . '-' . $counter;
+            $sql = "SELECT id FROM $table WHERE slug = :s";
+            if ($ignoreId !== null) {
+                $sql .= " AND id != " . (int)$ignoreId;
+            }
+            $sql .= " LIMIT 1";
+
+            $stmt = $db->prepare($sql);
+            $stmt->execute([':s' => $testSlug]);
+            if (!$stmt->fetch()) {
+                return $testSlug;
+            }
+            $counter++;
+        }
+    }
 }

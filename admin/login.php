@@ -3,7 +3,11 @@ require_once __DIR__ . '/auth.php';
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!Auth::validateCsrf($_POST['csrf'] ?? '')) {
+    if (Auth::isRateLimited()) {
+        http_response_code(429);
+        $error = 'Terlalu banyak percobaan login gagal. Silakan tunggu 15 menit.';
+    } elseif (!Auth::validateCsrf($_POST['csrf'] ?? '')) {
+        http_response_code(403);
         $error = 'Validasi sesi (CSRF) gagal. Silakan reload halaman.';
     } else {
         $user = trim($_POST['username'] ?? '');
@@ -12,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /admin/index.php');
             exit;
         } else {
+            http_response_code(401);
             $error = 'Username atau password salah.';
         }
     }

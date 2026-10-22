@@ -18,6 +18,7 @@ RewriteBase /
 
 # Protect config & internal folders
 RewriteRule ^(app|tests|docs)/ - [F,L]
+RewriteRule ^(config\.php|schema\.sql|\.gitignore)$ - [F,L]
 
 # Route all web requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -11,6 +11,19 @@ $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $uri = rtrim($uri, '/');
 if ($uri === '') $uri = '/';
 
+// API Route for tracking WhatsApp link clicks
+if ($uri === '/api/track-lead' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+    header('Content-Type: application/json');
+    $input = json_decode(file_get_contents('php://input'), true) ?? $_POST;
+    $leadId = Tracker::logLead('wa_click', [
+        'package_name' => $input['package_name'] ?? 'Konsultasi Umum',
+        'institution' => $input['institution'] ?? null,
+        'participants' => (int)($input['participants'] ?? 0)
+    ]);
+    echo json_encode(['success' => true, 'lead_id' => $leadId]);
+    exit;
+}
+
 // Core routes
 switch ($uri) {
     case '/':

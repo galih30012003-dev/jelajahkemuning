@@ -7,12 +7,11 @@ define('FPDF_VERSION', '1.86');
 
 class FPDF {
     protected int $page = 0;
-    protected int $n = 2;
+    protected int $n = 3;
     protected array $offsets = [];
     protected string $buffer = '';
     protected array $pages = [];
     protected int $state = 0;
-    protected bool $compress = false;
     protected float $k;
     protected string $DefOrientation = 'P';
     protected string $CurOrientation = 'P';
@@ -25,11 +24,7 @@ class FPDF {
     protected float $x, $y;
     protected float $lasth = 0;
     protected float $LineWidth = 0.567;
-    protected string $fontpath = '';
-    protected array $CoreFonts = [];
     protected array $fonts = [];
-    protected array $FontFiles = [];
-    protected array $diffs = [];
     protected string $FontFamily = '';
     protected string $FontStyle = '';
     protected bool $underline = false;
@@ -41,16 +36,12 @@ class FPDF {
     protected string $TextColor = '0 g';
     protected bool $ColorFlag = false;
     protected float $ws = 0;
-    protected array $images = [];
-    protected array $PageLinks = [];
-    protected array $links = [];
     protected bool $AutoPageBreak = true;
     protected float $PageBreakTrigger;
     protected bool $InHeader = false;
     protected bool $InFooter = false;
 
     public function __construct(string $orientation = 'P', string $unit = 'mm', string $size = 'A4') {
-        $this->CoreFonts = ['courier', 'helvetica', 'times', 'symbol', 'zapfdingbats'];
         $this->k = ($unit === 'pt') ? 1 : (($unit === 'mm') ? 72/25.4 : (($unit === 'cm') ? 72/2.54 : 72));
         $this->StdPageSizes = ['a3' => [841.89, 1190.55], 'a4' => [595.28, 841.89], 'a5' => [420.94, 595.28], 'letter' => [612, 792], 'legal' => [612, 1008]];
         $size = strtolower($size);
@@ -174,9 +165,29 @@ class FPDF {
         $this->FontSizePt = $size;
         $this->FontSize = $size / $this->k;
 
+        // Map to standard Type1 PascalCase PostScript names
+        $baseName = 'Helvetica';
+        if ($family === 'times') {
+            $baseName = 'Times-Roman';
+            if ($style === 'B') $baseName = 'Times-Bold';
+            elseif ($style === 'I') $baseName = 'Times-Italic';
+            elseif ($style === 'BI') $baseName = 'Times-BoldItalic';
+        } elseif ($family === 'courier') {
+            $baseName = 'Courier';
+            if ($style === 'B') $baseName = 'Courier-Bold';
+            elseif ($style === 'I') $baseName = 'Courier-Oblique';
+            elseif ($style === 'BI') $baseName = 'Courier-BoldOblique';
+        } else {
+            // Helvetica / Arial
+            $baseName = 'Helvetica';
+            if ($style === 'B') $baseName = 'Helvetica-Bold';
+            elseif ($style === 'I') $baseName = 'Helvetica-Oblique';
+            elseif ($style === 'BI') $baseName = 'Helvetica-BoldOblique';
+        }
+
         $fontkey = $family . $style;
         if (!isset($this->fonts[$fontkey])) {
-            $this->fonts[$fontkey] = ['i' => count($this->fonts) + 1, 'type' => 'core', 'name' => $family . ($style ? '-' . $style : '')];
+            $this->fonts[$fontkey] = ['i' => count($this->fonts) + 1, 'type' => 'core', 'name' => $baseName];
         }
         $this->CurrentFont = $this->fonts[$fontkey];
         if ($this->page > 0) {
@@ -188,17 +199,8 @@ class FPDF {
         $k = $this->k;
         if ($this->y + $h > $this->PageBreakTrigger && !$this->InHeader && !$this->InFooter && $this->AutoPageBreak) {
             $x = $this->x;
-            $ws = $this->ws;
-            if ($ws > 0) {
-                $this->ws = 0;
-                $this->_out('0 Tw');
-            }
             $this->AddPage($this->CurOrientation);
             $this->x = $x;
-            if ($ws > 0) {
-                $this->ws = $ws;
-                $this->_out(sprintf('%.3F Tw', $ws * $k));
-            }
         }
         if ($w === 0.0) $w = $this->w - $this->rMargin - $this->x;
         $s = '';
@@ -207,7 +209,7 @@ class FPDF {
             $s .= sprintf('%.2F %.2F %.2F %.2F re %s ', $this->x * $k, ($this->h - $this->y) * $k, $w * $k, -$h * $k, $op);
         }
         if ($txt !== '') {
-            $width = strlen($txt) * ($this->FontSizePt * 0.55); // approximate width
+            $width = strlen($txt) * ($this->FontSizePt * 0.55);
             if ($align === 'R') $dx = $w - ($width / $k) - 2;
             elseif ($align === 'C') $dx = ($w - ($width / $k)) / 2;
             else $dx = 2;
@@ -267,66 +269,79 @@ class FPDF {
         $this->buffer = '';
         $this->state = 2;
 
-        // Generate PDF Document
         $this->_put('%PDF-1.4');
-        // Pages
         $nb = $this->page;
+
+        // Object 1: Catalog
+        $this->offsets[1] = strlen($this->buffer);
+        $this->_put('1 0 obj');
+        $this->_put('<< /Type /Catalog /Pages 2 0 R >>');
+        $this->_put('endobj');
+
+        // Object 2: Pages root
+        $this->offsets[2] = strlen($this->buffer);
+        $this->_put('2 0 obj');
+        $this->_put('<< /Type /Pages');
+        $kids = '/Kids [';
+        for ($i = 1; $i <= $nb; $i++) {
+            $kids .= (3 + $i) . ' 0 R ';
+        }
+        $this->_put($kids . ']');
+        $this->_put("/Count $nb");
+        $this->_put(sprintf('/MediaBox [0 0 %.2F %.2F]', $this->DefPageSize[0], $this->DefPageSize[1]));
+        $this->_put('>>');
+        $this->_put('endobj');
+
+        // Object 3: Resources
+        $this->offsets[3] = strlen($this->buffer);
+        $this->_put('3 0 obj');
+        $this->_put('<< /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]');
+        $this->_put('/Font <<');
+        foreach ($this->fonts as $k => $font) {
+            $this->_put('/F' . $font['i'] . ' << /Type /Font /Subtype /Type1 /BaseFont /' . $font['name'] . ' >>');
+        }
+        $this->_put('>> >>');
+        $this->_put('endobj');
+
+        // Page descriptors: Object 4 to (3 + nb)
         for ($n = 1; $n <= $nb; $n++) {
-            $this->offsets[$n] = strlen($this->buffer);
-            $this->_put("$n 0 obj");
-            $this->_put('<< /Type /Page /Parent 1 0 R');
-            $this->_put('/Resources 2 0 R');
-            $this->_put('/Contents ' . ($nb + $n) . ' 0 R >>');
+            $pageObjId = 3 + $n;
+            $contentObjId = 3 + $nb + $n;
+            $this->offsets[$pageObjId] = strlen($this->buffer);
+            $this->_put("$pageObjId 0 obj");
+            $this->_put('<< /Type /Page /Parent 2 0 R');
+            $this->_put('/Resources 3 0 R');
+            $this->_put("/Contents $contentObjId 0 R >>");
             $this->_put('endobj');
         }
-        // Page contents
+
+        // Page content streams: Object (3 + nb + 1) to (3 + 2*nb)
         for ($n = 1; $n <= $nb; $n++) {
+            $contentObjId = 3 + $nb + $n;
             $p = $this->pages[$n];
-            $this->offsets[$nb + $n] = strlen($this->buffer);
-            $this->_put(($nb + $n) . ' 0 obj');
+            $this->offsets[$contentObjId] = strlen($this->buffer);
+            $this->_put("$contentObjId 0 obj");
             $this->_put('<< /Length ' . strlen($p) . ' >>');
             $this->_put('stream');
             $this->_put($p);
             $this->_put('endstream');
             $this->_put('endobj');
         }
-        // Resources & Fonts
-        $this->offsets[2] = strlen($this->buffer);
-        $this->_put('2 0 obj');
-        $this->_put('<< /ProcSet [/PDF /Text /ImageB /ImageC /ImageI]');
-        $this->_put('/Font <<');
-        foreach ($this->fonts as $k => $font) {
-            $this->_put('/F' . $font['i'] . ' << /Type /Font /Subtype /Type1 /BaseFont /' . ($font['name'] ?: 'Helvetica') . ' >>');
-        }
-        $this->_put('>> >>');
-        $this->_put('endobj');
-        // Pages root
-        $this->offsets[1] = strlen($this->buffer);
-        $this->_put('1 0 obj');
-        $this->_put('<< /Type /Pages');
-        $kids = '/Kids [';
-        for ($i = 1; $i <= $nb; $i++) $kids .= "$i 0 R ";
-        $this->_put($kids . ']');
-        $this->_put("/Count $nb");
-        $this->_put(sprintf('/MediaBox [0 0 %.2F %.2F]', $this->DefPageSize[0], $this->DefPageSize[1]));
-        $this->_put('>>');
-        $this->_put('endobj');
-        // Catalog
-        $this->offsets[$nb * 2 + 1] = strlen($this->buffer);
-        $this->_put(($nb * 2 + 1) . ' 0 obj');
-        $this->_put('<< /Type /Catalog /Pages 1 0 R >>');
-        $this->_put('endobj');
+
+        $totalObjects = 3 + ($nb * 2);
+
         // Cross-ref
         $o = strlen($this->buffer);
         $this->_put('xref');
-        $this->_put('0 ' . ($nb * 2 + 2));
+        $this->_put('0 ' . ($totalObjects + 1));
         $this->_put('0000000000 65535 f ');
-        for ($i = 1; $i <= ($nb * 2 + 1); $i++) {
+        for ($i = 1; $i <= $totalObjects; $i++) {
             $this->_put(sprintf('%010d 00000 n ', $this->offsets[$i] ?? 0));
         }
+
         // Trailer
         $this->_put('trailer');
-        $this->_put('<< /Size ' . ($nb * 2 + 2) . ' /Root ' . ($nb * 2 + 1) . ' 0 R >>');
+        $this->_put('<< /Size ' . ($totalObjects + 1) . ' /Root 1 0 R >>');
         $this->_put('startxref');
         $this->_put((string)$o);
         $this->_put('%%EOF');

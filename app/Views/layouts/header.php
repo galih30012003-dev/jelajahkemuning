@@ -1,6 +1,8 @@
 <?php
 $siteTitle = $pageTitle ?? 'Paket Wisata Kemuning - Jeep, Outbound & River Tubing Karanganyar';
 $siteDesc = $pageDesc ?? 'Penyedia paket wisata resmi CV Jelajah Kemuning. Melayani Jeep Offroad, River Tubing, Outbound Kantor, dan Sewa Villa Glamping berizin resmi & berasuransi.';
+$rawGtmId = Helpers::getSetting('gtm_id');
+$gtmId = preg_replace('/[^A-Za-z0-9-]/', '', $rawGtmId);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -10,7 +12,7 @@ $siteDesc = $pageDesc ?? 'Penyedia paket wisata resmi CV Jelajah Kemuning. Melay
     <title><?= Helpers::sanitize($siteTitle) ?></title>
     <meta name="description" content="<?= Helpers::sanitize($siteDesc) ?>">
     <link rel="stylesheet" href="/assets/css/style.min.css">
-    <?php if ($gtmId = Helpers::getSetting('gtm_id')): ?>
+    <?php if (!empty($gtmId)): ?>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

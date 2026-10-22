@@ -30,5 +30,6 @@
 </footer>
 <?php require __DIR__ . '/floating-cta.php'; ?>
 <script src="/assets/js/main.js"></script>
+<script src="/assets/js/tracker.js"></script>
 </body>
 </html>
