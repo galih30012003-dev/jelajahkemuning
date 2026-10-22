@@ -32,3 +32,17 @@ it('initializes in-memory sqlite database and executes schema successfully', fun
     assertTrue(in_array('settings', $tables), 'Table settings must exist');
     assertTrue(in_array('admin_users', $tables), 'Table admin_users must exist');
 });
+
+it('gracefully falls back to local sqlite when mysql server is not running on localhost', function () {
+    // Reset test instance to force fresh construction
+    $ref = new ReflectionProperty(Database::class, 'instance');
+    $ref->setValue(null, null);
+
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+    assertTrue($conn instanceof PDO, 'Connection must fall back to valid PDO instance');
+
+    // Verify fallback SQLite has tables created from schema
+    $tables = $conn->query("SELECT name FROM sqlite_master WHERE type='table'")->fetchAll(PDO::FETCH_COLUMN);
+    assertTrue(in_array('categories', $tables), 'Fallback SQLite should have initialized categories table');
+});
