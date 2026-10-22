@@ -22,7 +22,8 @@ class PackageController {
 
     public function parseInclusions(?string $inclusions): array {
         if (empty($inclusions)) return [];
-        $lines = preg_split('/\r\n|\r|\n/', trim($inclusions));
+        $normalized = str_replace(['\r\n', '\r', '\n'], "\n", $inclusions);
+        $lines = preg_split('/\r\n|\r|\n/', trim($normalized));
         return array_values(array_filter(array_map('trim', $lines)));
     }
 

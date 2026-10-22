@@ -75,8 +75,8 @@
 
                             <?php if (!empty($pkg['itinerary'])): ?>
                             <div class="itinerary-box">
-                                <strong>Rute Perjalanan</strong>
-                                <?= nl2br(Helpers::sanitize($pkg['itinerary'])) ?>
+                                <strong>Rute Perjalanan:</strong>
+                                <?= nl2br(Helpers::sanitize(str_replace(['\r\n', '\r', '\n'], "\n", $pkg['itinerary']))) ?>
                             </div>
                             <?php endif; ?>
 

@@ -5,9 +5,9 @@ class HomeController {
 
         $categories = $db->query("SELECT * FROM categories ORDER BY id ASC")->fetchAll(PDO::FETCH_ASSOC);
 
-        // 3 Paket Terlaris Rombongan
-        $topCombos = $db->query("SELECT p.*, c.name as category_name FROM packages p JOIN categories c ON p.category_id = c.id WHERE (p.category_id = 2 AND (p.slug LIKE '%combo%' OR p.slug LIKE '%seru-3%')) OR p.badge = 'TERLARIS' ORDER BY p.price ASC LIMIT 3")->fetchAll(PDO::FETCH_ASSOC);
-        if (empty($topCombos)) {
+        // 3 Paket Terlaris Wisata Kemuning (Persis KemuningAdventure.com)
+        $topCombos = $db->query("SELECT p.*, c.name as category_name FROM packages p JOIN categories c ON p.category_id = c.id WHERE p.slug IN ('paket-outbound-2', 'paket-outbound-4', 'jeep-adventure-short-2') ORDER BY p.price ASC")->fetchAll(PDO::FETCH_ASSOC);
+        if (count($topCombos) < 3) {
             $topCombos = $db->query("SELECT p.*, c.name as category_name FROM packages p JOIN categories c ON p.category_id = c.id WHERE p.is_active = 1 LIMIT 3")->fetchAll(PDO::FETCH_ASSOC);
         }
 
@@ -47,9 +47,9 @@ class HomeController {
 
         $faqs = [
             ['q' => 'Apakah bisa untuk wisatawan dari luar kota?', 'a' => 'Ya, bisa banget! Admin kami siap bantu koordinasi rute perjalanan, rekomendasi itinerary, dan meeting point penjemputan dari stasiun atau bandara Solo.'],
-            ['q' => 'Minimal peserta untuk booking paket berapa orang?', 'a' => 'Untuk paket gathering outbound minimal 16 orang. Untuk Jeep Adventure dihitung per armada (maksimal 4 orang per mobil). Sedangkan River Tubing minimal 5 orang.'],
+            ['q' => 'Minimal peserta untuk booking paket berapa orang?', 'a' => 'Untuk paket gathering outbound minimal 16 orang. Untuk Jeep Adventure dihitung per armada (maksimal 4 orang per mobil). Sedangkan River Tubing minimal 16 orang.'],
             ['q' => 'Apakah tersedia asuransi keselamatan?', 'a' => 'Tersedia asuransi resmi wisata sesuai ketentuan paket untuk menjamin kenyamanan dan keselamatan seluruh peserta rombongan.'],
-            ['q' => 'Titik kumpul / meeting point di mana?', 'a' => 'Meeting point utama di Terminal Wisata Kemuning, Ngargoyoso, Karanganyar dengan area parkir bus luas, toilet bersih, dan aula transit.'],
+            ['q' => 'Titik kumpul / meeting point di mana?', 'a' => 'Meeting point utama di Terminal Wisata Kemuning, Ngargoyoso, Karanganyar dengan area parkir bus luas, toilet bersih, dan tempat transit.'],
             ['q' => 'Bisa custom rute & durasi kegiatan?', 'a' => 'Bisa! Kamu bisa request rute jeep khusus (Jembatan Kaca, Candi Cetho, Paralayang), konsep fun games, hingga jadwal makan siang sesuai kebutuhan.'],
             ['q' => 'Apakah aman untuk anak-anak / lansia / pemula?', 'a' => 'Sangat aman. Rute santai dan track tubing sudah dilengkapi standar keselamatan tinggi dengan pemandu lokal berpengalaman.'],
             ['q' => 'Cara booking dan pembayarannya bagaimana?', 'a' => 'Cukup klik tombol WhatsApp, pilih paket dan tanggal, lalu admin kami akan mengirimkan invoice dan konfirmasi jadwal trip.'],
@@ -58,7 +58,7 @@ class HomeController {
         return [
             'categories' => $categories,
             'topCombos' => $topCombos,
-            'topPackages' => $topCombos, // alias for backwards test compatibility
+            'topPackages' => $topCombos,
             'jeepPackages' => $jeepPackages,
             'outboundPackages' => $outboundPackages,
             'tubingPackages' => $tubingPackages,

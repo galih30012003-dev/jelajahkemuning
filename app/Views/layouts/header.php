@@ -73,28 +73,28 @@ $nibNum = Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458
                             <span class="dropdown-link-title">Jeep Adventure 4x4</span>
                             <span class="dropdown-link-sub">Offroad Kebun Teh & Sungai</span>
                         </div>
-                        <span class="dropdown-link-price">300rb/Jeep</span>
+                        <span class="dropdown-link-price">350rb/Jeep</span>
                     </a>
                     <a href="/paket-outbound-kemuning/" class="dropdown-link">
                         <div>
                             <span class="dropdown-link-title">Outbound & Gathering</span>
                             <span class="dropdown-link-sub">Fun Games, Makan & Aula</span>
                         </div>
-                        <span class="dropdown-link-price">80rb/Org</span>
+                        <span class="dropdown-link-price">90rb/Org</span>
                     </a>
                     <a href="/river-tubing-kemuning/" class="dropdown-link">
                         <div>
-                            <span class="dropdown-link-title">River Tubing Senatah</span>
-                            <span class="dropdown-link-sub">Jeram Alami & Safety Lengkap</span>
+                            <span class="dropdown-link-title">River Tubing Kemuning</span>
+                            <span class="dropdown-link-sub">Kali Guci, Senatah & Pring Kuning</span>
                         </div>
-                        <span class="dropdown-link-price">50rb/Org</span>
+                        <span class="dropdown-link-price">45rb/Org</span>
                     </a>
                     <a href="/paket-hemat-jeep-kemuning/" class="dropdown-link">
                         <div>
                             <span class="dropdown-link-title">Paket Hemat Jeep</span>
                             <span class="dropdown-link-sub">Hitungan Per Orang + Makan</span>
                         </div>
-                        <span class="dropdown-link-price">150rb/Org</span>
+                        <span class="dropdown-link-price">165rb/Org</span>
                     </a>
                     <a href="/villa-glamping-kemuning/" class="dropdown-link">
                         <div>
