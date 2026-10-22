@@ -8,4 +8,4 @@ define('BASE_URL', getenv('BASE_URL') ?: 'https://jelajahkemuning.com');
 define('SITE_NAME', 'Jelajah Kemuning');
 define('CV_NAME', 'CV Jelajah Kemuning');
 define('CV_NIB', '0705250012458');
-define('DEFAULT_WA', '6281234567890');
+define('DEFAULT_WA', '6285171001566');

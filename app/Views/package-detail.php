@@ -1,88 +1,103 @@
-<div style="background:linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color:#fff; padding:60px 0;">
+<!-- Category Hero Banner -->
+<div class="hero-wrapper" style="padding:56px 0;">
     <div class="container" style="text-align:center;">
-        <span class="badge-trust" style="background:rgba(255,255,255,0.15); color:#fff; border-color:rgba(255,255,255,0.3);">✓ Resmi CV Jelajah Kemuning • Asuransi Tersedia • Driver Lokal</span>
-        <h1 style="font-size:2.4rem; font-weight:900; margin:16px 0 8px;"><?= Helpers::sanitize($category['name']) ?></h1>
-        <p style="max-width:700px; margin:0 auto; opacity:0.92; font-size:15px; line-height:1.6;">
+        <div style="display:inline-flex; align-items:center; gap:8px; margin-bottom:14px;">
+            <span class="badge-glass">🛡️ CV Jelajah Kemuning • NIB: <?= Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458') ?></span>
+            <span class="badge-glass">✓ Asuransi Resmi & Free Dokumentasi</span>
+        </div>
+        <h1 style="font-size:clamp(2rem, 3.8vw, 3rem); font-weight:900; margin:10px 0 12px; letter-spacing:-0.02em;">
+            <?= Helpers::sanitize($category['name']) ?>
+        </h1>
+        <p style="max-width:720px; margin:0 auto 24px; opacity:0.92; font-size:15px; line-height:1.7;">
             <?= Helpers::sanitize($category['description'] ?? 'Penyedia paket wisata resmi Karanganyar dengan rute terbaik dan fasilitas terlengkap.') ?>
         </p>
-        <div style="margin-top:24px; display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-            <a href="<?= Helpers::generateWaLink($category['name']) ?>" class="btn-accent" style="font-size:15px; padding:12px 24px;">
+        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+            <a href="<?= Helpers::generateWaLink($category['name']) ?>" class="btn-accent" style="font-size:15px; padding:12px 26px;">
                 📲 Konsultasi WhatsApp Cepat
             </a>
-            <a href="/proposal/" class="btn-primary" style="background:#fff; color:var(--primary); font-size:15px; padding:12px 22px;">
+            <a href="/proposal/" class="btn-white" style="font-size:15px; padding:12px 22px;">
                 📄 Unduh Proposal PDF Resmi
             </a>
         </div>
     </div>
 </div>
 
-<div class="container" style="padding:54px 16px;">
-    <div style="text-align:center; max-width:700px; margin:0 auto 36px;">
-        <h2 style="font-size:1.85rem; font-weight:900; color:var(--primary); margin-bottom:6px;">
+<div class="container" style="padding:60px 20px;">
+    <div style="text-align:center; max-width:720px; margin:0 auto 40px;">
+        <span class="badge-trust">PILIHAN RESMI & HARGA TRANSPARAN</span>
+        <h2 style="font-size:2.2rem; font-weight:900; color:var(--color-primary); margin:12px 0 6px;">
             Pilihan Lengkap Paket <?= Helpers::sanitize($category['name']) ?>
         </h2>
-        <p style="color:var(--text-muted); font-size:14px;">Pilih rute, durasi, dan fasilitas yang sesuai dengan rombongan kamu.</p>
+        <p style="color:var(--text-muted); font-size:14.5px;">Pilih rute, durasi, dan fasilitas yang sesuai dengan rombongan kamu.</p>
     </div>
 
-    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:28px;">
+    <div class="packages-grid">
         <?php foreach ($packages as $pkg): ?>
-        <div class="card-package" style="padding:28px; display:flex; flex-direction:column; justify-content:space-between;">
+        <div class="card-package">
             <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <?php if (!empty($pkg['thumbnail'])): ?>
+                <div class="card-thumb-wrap">
+                    <img src="<?= htmlspecialchars($pkg['thumbnail']) ?>" alt="<?= Helpers::sanitize($pkg['name']) ?>" loading="lazy">
                     <?php if (!empty($pkg['badge'])): ?>
-                    <span style="background:var(--accent); color:#fff; font-size:11px; font-weight:800; padding:4px 10px; border-radius:4px;">
-                        <?= Helpers::sanitize($pkg['badge']) ?>
-                    </span>
-                    <?php else: ?>
-                    <span style="background:#ECFDF5; color:#047857; font-size:11px; font-weight:700; padding:4px 8px; border-radius:4px;">
-                        TERSEDIA
-                    </span>
+                    <span class="card-thumb-badge"><?= Helpers::sanitize($pkg['badge']) ?></span>
                     <?php endif; ?>
-
                     <?php if (!empty($pkg['duration'])): ?>
-                    <span style="font-size:12px; font-weight:600; color:var(--text-muted);">⏱️ <?= Helpers::sanitize($pkg['duration']) ?></span>
+                    <span class="card-thumb-duration">⏱️ <?= Helpers::sanitize($pkg['duration']) ?></span>
                     <?php endif; ?>
                 </div>
-
-                <h3 style="font-size:1.35rem; font-weight:800; color:var(--primary); margin:8px 0;"><?= Helpers::sanitize($pkg['name']) ?></h3>
-
-                <div style="margin:12px 0 16px;">
-                    <span style="font-size:1.85rem; font-weight:900; color:var(--accent);"><?= Helpers::formatRupiah($pkg['price']) ?></span>
-                    <span style="font-size:13px; color:var(--text-muted);">/ <?= $pkg['price_type'] === 'per_armada' ? 'Armada (Maks 4 Org)' : 'Orang' ?></span>
-                </div>
-
-                <?php if (!empty($pkg['min_participants']) && $pkg['min_participants'] > 1): ?>
-                <div style="font-size:12px; color:var(--accent); font-weight:700; margin-bottom:12px;">
-                    NB : MINIMAL <?= $pkg['min_participants'] ?> PESERTA
-                </div>
                 <?php endif; ?>
 
-                <?php if (!empty($pkg['itinerary'])): ?>
-                <div style="background:#F9FAFB; border:1px solid #E5E7EB; border-radius:8px; padding:14px; margin-bottom:16px;">
-                    <div style="font-size:12px; font-weight:700; color:var(--primary); margin-bottom:4px;">📍 Rute Perjalanan:</div>
-                    <div style="font-size:12.5px; color:#4B5563; line-height:1.6;"><?= nl2br(Helpers::sanitize($pkg['itinerary'])) ?></div>
+                <div class="card-body">
+                    <div>
+                        <?php if (empty($pkg['thumbnail'])): ?>
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <?php if (!empty($pkg['badge'])): ?>
+                            <span class="card-thumb-badge" style="position:static;"><?= Helpers::sanitize($pkg['badge']) ?></span>
+                            <?php endif; ?>
+                            <?php if (!empty($pkg['duration'])): ?>
+                            <span style="font-size:12px; font-weight:700; color:var(--text-muted);">⏱️ <?= Helpers::sanitize($pkg['duration']) ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
+
+                        <h3 class="card-title"><?= Helpers::sanitize($pkg['name']) ?></h3>
+
+                        <div class="card-price-wrap">
+                            <span class="card-price"><?= Helpers::formatRupiah($pkg['price']) ?></span>
+                            <span class="card-price-unit">/ <?= $pkg['price_type'] === 'per_armada' ? 'Armada (Maks 4 Orang)' : 'Orang' ?></span>
+                            <?php if (!empty($pkg['min_participants']) && $pkg['min_participants'] > 1): ?>
+                            <div style="font-size:11.5px; color:var(--color-accent); font-weight:800; margin-top:3px;">
+                                NB : MINIMAL <?= $pkg['min_participants'] ?> PESERTA
+                            </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <?php if (!empty($pkg['itinerary'])): ?>
+                        <div class="itinerary-box">
+                            <div class="itinerary-title">📍 Rute Perjalanan:</div>
+                            <div class="itinerary-text"><?= nl2br(Helpers::sanitize($pkg['itinerary'])) ?></div>
+                        </div>
+                        <?php endif; ?>
+
+                        <h4 style="font-size:13px; font-weight:800; color:#374151; margin:14px 0 8px; border-bottom:1px solid var(--border); padding-bottom:6px;">Fasilitas Termasuk:</h4>
+                        <ul class="facility-list">
+                            <?php
+                            $incList = (new PackageController())->parseInclusions($pkg['inclusions'] ?? '');
+                            if (empty($incList)): ?>
+                                <li><span class="check">✓</span> Fasilitas lengkap standar CV Jelajah Kemuning.</li>
+                            <?php else:
+                                foreach ($incList as $inc): ?>
+                                <li><span class="check">✓</span> <span><?= Helpers::sanitize($inc) ?></span></li>
+                            <?php endforeach; endif; ?>
+                        </ul>
+                    </div>
+
+                    <div style="margin-top:20px;">
+                        <a href="<?= Helpers::generateWaLink($pkg['name'], Helpers::formatRupiah($pkg['price'])) ?>" class="btn-accent" style="width:100%; justify-content:center; font-size:15px;">
+                            📲 Booking Paket via WhatsApp
+                        </a>
+                    </div>
                 </div>
-                <?php endif; ?>
-
-                <h4 style="font-size:13px; font-weight:700; color:#374151; margin-top:14px; border-bottom:1px solid var(--border); padding-bottom:6px;">Fasilitas Termasuk:</h4>
-                <ul style="list-style:none; margin-top:10px; font-size:13px; display:flex; flex-direction:column; gap:6px; color:#4B5563;">
-                    <?php
-                    $incList = (new PackageController())->parseInclusions($pkg['inclusions'] ?? '');
-                    if (empty($incList)): ?>
-                        <li style="color:var(--text-muted);">Fasilitas lengkap standar CV Jelajah Kemuning.</li>
-                    <?php else:
-                        foreach ($incList as $inc): ?>
-                        <li style="display:flex; align-items:flex-start; gap:6px;">
-                            <span style="color:#059669; font-weight:bold;">✓</span> <span><?= Helpers::sanitize($inc) ?></span>
-                        </li>
-                    <?php endforeach; endif; ?>
-                </ul>
-            </div>
-
-            <div style="margin-top:24px;">
-                <a href="<?= Helpers::generateWaLink($pkg['name'], Helpers::formatRupiah($pkg['price'])) ?>" class="btn-accent" style="width:100%; justify-content:center; font-size:15px;">
-                    📲 Booking Paket via WhatsApp
-                </a>
             </div>
         </div>
         <?php endforeach; ?>
@@ -90,23 +105,27 @@
 </div>
 
 <!-- FAQ & Info Section -->
-<div style="background:#F8FAF8; border-top:1px solid var(--border); padding:54px 0;">
-    <div class="container" style="max-width:800px;">
-        <h3 style="text-align:center; font-size:1.5rem; font-weight:800; color:var(--primary); margin-bottom:24px;">
-            Pertanyaan Seputar <?= Helpers::sanitize($category['name']) ?>
-        </h3>
+<div style="background:#F8FAF8; border-top:1px solid var(--border); padding:64px 0;">
+    <div class="container" style="max-width:820px;">
+        <div style="text-align:center; margin-bottom:32px;">
+            <span class="badge-trust">INFORMASI & FAQ</span>
+            <h3 style="font-size:1.85rem; font-weight:900; color:var(--color-primary); margin-top:8px;">
+                Pertanyaan Seputar <?= Helpers::sanitize($category['name']) ?>
+            </h3>
+        </div>
+
         <div style="display:flex; flex-direction:column; gap:12px;">
-            <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px 20px;">
-                <div style="font-weight:700; color:var(--primary); margin-bottom:4px;">Bisa custom rute dan jam keberangkatan?</div>
-                <div style="font-size:13.5px; color:var(--text-muted);">Bisa banget! Jam dan rute trip sangat fleksibel, silakan koordinasikan dengan admin via WhatsApp.</div>
+            <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 22px; box-shadow:var(--shadow-low);">
+                <div style="font-weight:800; color:var(--color-primary); font-size:15px; margin-bottom:4px;">Bisa custom rute dan jam keberangkatan?</div>
+                <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">Bisa banget! Jam dan rute trip sangat fleksibel, silakan koordinasikan dengan admin via WhatsApp sesuai jadwal rombongan kamu.</div>
             </div>
-            <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px 20px;">
-                <div style="font-weight:700; color:var(--primary); margin-bottom:4px;">Apakah sudah termasuk asuransi dan dokumentasi?</div>
-                <div style="font-size:13.5px; color:var(--text-muted);">Seluruh paket resmi kami sudah include asuransi wisata dan bonus gratis dokumentasi foto/video untuk rombongan.</div>
+            <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 22px; box-shadow:var(--shadow-low);">
+                <div style="font-weight:800; color:var(--color-primary); font-size:15px; margin-bottom:4px;">Apakah sudah termasuk asuransi dan dokumentasi?</div>
+                <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">Seluruh paket resmi kami sudah include asuransi wisata dan bonus gratis dokumentasi foto/video untuk rombongan yang di-share lewat link Google Drive.</div>
             </div>
-            <div style="background:#fff; border:1px solid var(--border); border-radius:8px; padding:16px 20px;">
-                <div style="font-weight:700; color:var(--primary); margin-bottom:4px;">Di mana titik kumpulnya?</div>
-                <div style="font-size:13.5px; color:var(--text-muted);">Meeting point utama di Terminal Wisata Kemuning, Karanganyar dengan fasilitas parkir bus luas dan aula transit gratis.</div>
+            <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:18px 22px; box-shadow:var(--shadow-low);">
+                <div style="font-weight:800; color:var(--color-primary); font-size:15px; margin-bottom:4px;">Di mana titik kumpul meeting pointnya?</div>
+                <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">Meeting point utama di Terminal Wisata Kemuning, Ngargoyoso, Karanganyar dengan area parkir bus luas, toilet bersih, dan aula transit gratis.</div>
             </div>
         </div>
     </div>

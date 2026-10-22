@@ -1,0 +1,375 @@
+{
+  "meta": {
+    "name": "Kemuning Signature — Highland Eco-Adventure & Corporate Resort",
+    "description": "Three-dimensional Design DNA profile for JelajahKemuning.com combining lush Mount Lawu tea-plantation emerald tones, high-conversion terracotta adventure accents, real trip photography, glassmorphic surfaces, and interactive Canvas 2D highland mist particles.",
+    "source_references": [
+      "https://jelajahkemuning.com",
+      "https://jelajahkemuning.com/jeep-adventure-kemuning/",
+      "https://jelajahkemuning.com/paket-outbound-kemuning/",
+      "https://jelajahkemuning.com/river-tubing-kemuning/"
+    ],
+    "created_at": "2026-10-22"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "split-complementary",
+      "primary": {
+        "hex": "#0B3B24",
+        "role": "Deep Tea Emerald for brand authority, hero immersion, and primary headings"
+      },
+      "secondary": {
+        "hex": "#10B981",
+        "role": "Fresh Highland Leaf Green for trust badges, checkmarks, and eco-adventure highlights"
+      },
+      "accent": {
+        "hex": "#EA580C",
+        "role": "Warm Terracotta / Sunrise Orange for high-converting WhatsApp CTAs, pricing highlights, and popular badges"
+      },
+      "neutral": {
+        "scale": [
+          "#F8FAF8",
+          "#F1F5F2",
+          "#E2E8E4",
+          "#CBD5CE",
+          "#64746B",
+          "#334139",
+          "#111C16",
+          "#07120C"
+        ],
+        "usage": "Lightest #F8FAF8 for main page canvas, #FFFFFF for elevated cards, #111C16 for primary body text, #64746B for secondary captions"
+      },
+      "semantic": {
+        "success": "#059669",
+        "warning": "#D97706",
+        "error": "#DC2626",
+        "info": "#0284C7"
+      },
+      "surface": {
+        "background": "#F8FAF8",
+        "card": "#FFFFFF",
+        "elevated": "#0B3B24"
+      },
+      "contrast_strategy": "High-contrast dark-emerald hero & testimonial sections alternating with crisp warm-white content sections and vibrant terracotta action triggers"
+    },
+    "typography": {
+      "type_scale": {
+        "display": {
+          "size": "clamp(2.25rem, 4.5vw, 3.75rem)",
+          "weight": "800",
+          "line_height": "1.12",
+          "tracking": "-0.03em"
+        },
+        "heading_1": {
+          "size": "clamp(1.875rem, 3.5vw, 2.75rem)",
+          "weight": "800",
+          "line_height": "1.18",
+          "tracking": "-0.025em"
+        },
+        "heading_2": {
+          "size": "clamp(1.5rem, 2.8vw, 2.25rem)",
+          "weight": "800",
+          "line_height": "1.22",
+          "tracking": "-0.02em"
+        },
+        "heading_3": {
+          "size": "1.25rem",
+          "weight": "700",
+          "line_height": "1.35",
+          "tracking": "-0.01em"
+        },
+        "body": {
+          "size": "1rem",
+          "weight": "400",
+          "line_height": "1.65",
+          "tracking": "0em"
+        },
+        "body_small": {
+          "size": "0.875rem",
+          "weight": "500",
+          "line_height": "1.55",
+          "tracking": "0em"
+        },
+        "caption": {
+          "size": "0.75rem",
+          "weight": "600",
+          "line_height": "1.4",
+          "tracking": "0.02em"
+        },
+        "overline": {
+          "size": "0.75rem",
+          "weight": "800",
+          "line_height": "1.2",
+          "tracking": "0.08em"
+        }
+      },
+      "font_families": {
+        "heading": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+        "body": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
+        "mono": "'JetBrains Mono', monospace"
+      },
+      "font_style_notes": "Geometric-humanist sans-serif ('Plus Jakarta Sans') giving both modern Indonesian travel-tech polish and warm approachability"
+    },
+    "spacing": {
+      "base_unit": "8px",
+      "scale": ["4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px", "96px"],
+      "content_density": "comfortable",
+      "section_rhythm": "Generous 80px-96px vertical padding on desktop, 56px on mobile, separated by organic SVG highland wave dividers"
+    },
+    "layout": {
+      "grid_system": "CSS Grid 12-column & responsive auto-fit Bento cards",
+      "max_content_width": "1240px",
+      "columns": 12,
+      "gutter": "24px",
+      "breakpoints": {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px"
+      },
+      "alignment_tendency": "Asymmetric split hero with centered section headers and 3-column bento package grids"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "10px",
+        "medium": "16px",
+        "large": "24px",
+        "pill": "9999px"
+      },
+      "border_usage": "Subtle 1px borders (#E2E8E4) on light cards and luminous 1px rgba(255,255,255,0.16) borders on glassmorphism layers",
+      "divider_style": "Layered SVG mountain/tea-hill silhouette waves"
+    },
+    "elevation": {
+      "shadow_style": "layered",
+      "levels": {
+        "low": "0 4px 12px -2px rgba(11, 59, 36, 0.06), 0 2px 6px -1px rgba(11, 59, 36, 0.04)",
+        "medium": "0 16px 32px -8px rgba(11, 59, 36, 0.10), 0 4px 12px -2px rgba(11, 59, 36, 0.05)",
+        "high": "0 24px 48px -12px rgba(11, 59, 36, 0.18), 0 12px 24px -6px rgba(234, 88, 12, 0.12)"
+      },
+      "depth_cues": "Overlapping photo collages, frosted glass badges over package thumbnails, and elevated featured pricing card"
+    },
+    "iconography": {
+      "style": "Duotone SVG & crisp rounded line icons",
+      "stroke_weight": "2px",
+      "size_scale": ["16px", "20px", "24px", "32px"],
+      "preferred_set": "Custom inline SVG icons + semantic adventure badges"
+    },
+    "motion": {
+      "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "duration_scale": {
+        "micro": "180ms",
+        "normal": "350ms",
+        "macro": "700ms"
+      },
+      "entrance_pattern": "Staggered fade-up (translateY 24px to 0) triggered via IntersectionObserver",
+      "exit_pattern": "Smooth opacity fade-out (200ms)",
+      "philosophy": "cinematic"
+    },
+    "components": {
+      "button_style": "Pill/rounded-md buttons with gradient terracotta fill, subtle inner highlight, icon prefix, and hover lift + glow",
+      "input_style": "12px rounded inputs with 1.5px border and emerald focus ring",
+      "card_style": "20px rounded photo-header cards with aspect-ratio 16/10 thumbnail, floating glass duration/badge pills, route timeline box, and sticky bottom CTA",
+      "navigation_pattern": "Sticky frosted-glass navbar with official logo, category links, quiz badge, and pulse WhatsApp CTA",
+      "modal_style": "Centered glass-backdrop lightbox for gallery photos and interactive quiz/proposal steps",
+      "list_style": "Custom emerald checkmark pills with bold key inclusions",
+      "component_notes": "Featured 'Paket Terlaris' card scales 1.03x on desktop with a glowing terracotta border and ribbon"
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["adventurous", "trustworthy", "refreshing", "vibrant", "hospitable"],
+      "visual_metaphor": "Morning sunlight breaking through misty Mount Lawu tea plantations before an offroad expedition",
+      "era_influence": "2026 Modern Boutique Travel & Outdoor Experience Platform",
+      "genre": "Eco-Adventure Tourism & Corporate Gathering Concierge",
+      "personality_traits": ["energetic", "reliable", "local-expert", "transparent", "warm"],
+      "adjectives": ["lush", "action-packed", "official", "scenic", "effortless"]
+    },
+    "visual_language": {
+      "complexity": "rich",
+      "ornamentation": "subtle accents",
+      "whitespace_usage": "Balanced breathing room around dense, scannable package facility lists",
+      "visual_weight_distribution": "Heavy visual anchor in Hero & 3 Bestseller Cards, followed by structured category showcases",
+      "focal_strategy": "Progressive reveal from Hero collage -> 3 Bestseller Packages -> Interactive Route & Category Explorer -> Social Proof",
+      "contrast_level": "High contrast between deep forest greens, crisp white cards, and fiery orange CTAs",
+      "texture_usage": "Subtle radial mesh glows, frosted glass overlays, and real outdoor adventure photography"
+    },
+    "composition": {
+      "hierarchy_method": "Scale contrast + color weight + photographic framing",
+      "balance_type": "asymmetric",
+      "flow_direction": "Z-pattern in hero transitioning to scannable 3-column bento grids",
+      "grouping_strategy": "Card enclosures with distinct header thumbnails, pricing bands, route boxes, and facility checklists",
+      "negative_space_role": "Separates distinct tourism activities (Jeep vs. Outbound vs. Tubing vs. Villa) for effortless comparison"
+    },
+    "imagery": {
+      "photo_treatment": "High-saturation real Kemuning trip photos with subtle bottom gradient scrims for badge legibility and zoom-on-hover",
+      "illustration_style": "Organic SVG mountain & tea-leaf vector accents",
+      "graphic_elements": "Floating NIB legal badges, route stop timeline pills, and 5-star Google review cards",
+      "pattern_usage": "Subtle dot/topographic grid pattern in hero background",
+      "image_shape": "Rounded 16px-20px containers with overflow hidden"
+    },
+    "interaction_feel": {
+      "feedback_style": "Immediate visual elevation (-6px translateY) and button shadow intensification",
+      "hover_behavior": "Card lift, thumbnail 1.06x scale zoom, and CTA arrow translation",
+      "transition_personality": "smooth glide",
+      "loading_style": "Instant SSR rendering with progressive scroll-reveal",
+      "microinteraction_density": "Moderate and purposeful — focused on package comparison, gallery filtering, and WhatsApp conversion"
+    },
+    "brand_voice_in_ui": {
+      "tone": "Friendly, enthusiastic local guide backed by formal CV corporate credibility",
+      "formality": "Semi-formal (casual-warm for families, structured and legal-ready with NIB & PDF proposals for corporate committees)",
+      "cta_style": "Direct action-oriented invitation ('Booking Cepat via WA', 'Unduh Proposal PDF Resmi')",
+      "empty_state_approach": "Helpful direct WhatsApp consultation prompt",
+      "error_tone": "Polite, clear, and solution-oriented"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "moderate",
+      "performance_tier": "medium",
+      "fallback_strategy": "reduce to CSS",
+      "primary_technology": "Canvas 2D"
+    },
+    "background_effects": {
+      "type": "mesh-gradient",
+      "description": "Layered radial emerald and warm sunlight mesh gradients behind the hero and CTA sections",
+      "technology": "CSS radial-gradient + Canvas 2D overlay",
+      "params": {
+        "color_palette": ["#071E12", "#0B3B24", "#155E3B", "#EA580C"],
+        "speed": "slow",
+        "density": "medium",
+        "opacity": "0.85",
+        "blend_mode": "screen"
+      }
+    },
+    "particle_systems": {
+      "enabled": true,
+      "type": "fireflies",
+      "description": "Floating morning mist motes and golden sunlight particles drifting across the Kemuning highland hero section",
+      "technology": "Canvas 2D",
+      "params": {
+        "count": 45,
+        "shape": "circle",
+        "size_range": [1.5, 4.5],
+        "movement_pattern": "gentle upward and lateral drift with sine-wave oscillation",
+        "color_behavior": "Warm gold (#FBBF24) and soft emerald mist (#A7F3D0) with pulsing alpha",
+        "interaction": "mouse-repel",
+        "spawn_area": "full hero canvas"
+      }
+    },
+    "3d_elements": {
+      "enabled": false,
+      "type": "none",
+      "description": "Not used to preserve instant mobile load speed on shared hosting",
+      "technology": "none",
+      "params": {
+        "renderer": "none",
+        "lighting": "none",
+        "camera": "none",
+        "materials": "none",
+        "geometry": "none",
+        "post_processing": [],
+        "interaction_model": "none"
+      }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "Not used",
+      "technology": "none",
+      "params": {
+        "uniforms": [],
+        "vertex_manipulation": "none",
+        "fragment_output": "none",
+        "noise_type": "none",
+        "distortion": "none"
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": true,
+        "layers": "2",
+        "depth_range": "0.15 to 0.3",
+        "speed_curve": "linear"
+      },
+      "scroll_triggered_animations": {
+        "enabled": true,
+        "trigger_points": "15% viewport intersection",
+        "animation_type": "fade-up",
+        "scrub_behavior": "triggered"
+      },
+      "scroll_morphing": {
+        "enabled": false,
+        "description": "None"
+      }
+    },
+    "text_effects": {
+      "type": "gradient-fill",
+      "description": "Golden-emerald gradient text highlight on key hero headline words",
+      "technology": "CSS background-clip: text",
+      "params": {
+        "split_strategy": "by-word",
+        "animation_per_unit": "shimmer",
+        "stagger": "0ms",
+        "effect_style": "linear-gradient(135deg, #FDE68A 0%, #34D399 50%, #F97316 100%)"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "Disabled as primary audience is mobile/tablet WhatsApp bookers",
+      "params": {
+        "shape": "none",
+        "size": "0",
+        "blend_mode": "normal",
+        "trail": "none",
+        "interaction_zone": "none"
+      }
+    },
+    "image_effects": {
+      "type": "parallax-tilt",
+      "description": "Smooth 1.06x image scale zoom on card hover with gradient overlay reveal and interactive lightbox zoom",
+      "technology": "CSS transform + Vanilla JS lightbox",
+      "params": {
+        "filter_pipeline": "contrast(1.03) saturate(1.05)",
+        "hover_transform": "scale(1.06)",
+        "reveal_animation": "fade-up",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": true,
+      "style": "glass",
+      "params": {
+        "blur_radius": "16px",
+        "transparency": "0.85",
+        "border_treatment": "1px solid rgba(255, 255, 255, 0.22)",
+        "shadow_type": "0 8px 32px rgba(7, 18, 12, 0.15)",
+        "light_source_angle": "135deg"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": true,
+      "type": "interactive-blobs",
+      "description": "Hero Canvas 2D floating highland mist & sun-motes with mouse-repel physics",
+      "technology": "Canvas 2D",
+      "params": {
+        "draw_method": "arc + radialGradient",
+        "animation_loop": "requestAnimationFrame",
+        "color_scheme": ["#FBBF24", "#A7F3D0", "#FFFFFF"],
+        "responsiveness": "ResizeObserver",
+        "interaction": "pointermove repel"
+      }
+    },
+    "svg_animations": {
+      "enabled": true,
+      "type": "decorative-loop",
+      "description": "Layered SVG mountain/tea-plantation wave dividers and pulsing WhatsApp status indicator",
+      "params": {
+        "animation_method": "CSS keyframes",
+        "path_morphing": "none",
+        "stroke_animation": "pulse ring",
+        "filter_effects": "drop-shadow"
+      }
+    },
+    "composite_notes": "Combines fast server-side rendered HTML with lightweight Canvas 2D atmospheric particles in the hero, real WebP trip photography on every card, category filter tabs on the homepage, and an interactive photo lightbox for the documentation gallery."
+  }
+}
