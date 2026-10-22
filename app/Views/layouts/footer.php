@@ -1,65 +1,67 @@
-<footer style="background: #111827; color:#9CA3AF; padding:56px 0 28px; border-top:1px solid #1F2937;">
-    <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:36px;">
+<footer style="background: var(--bg-forest); color: rgba(255,255,255,0.78); padding: 64px 0 32px; border-top: 1px solid rgba(255,255,255,0.1);">
+    <div class="container" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:40px;">
         <div>
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-                <img src="/assets/uploads/cropped-logo-jelajah-kemuningg.png" alt="Logo Jelajah Kemuning" style="height:38px; width:auto; border-radius:4px; background:#fff; padding:2px;" onerror="this.style.display='none'">
-                <span style="font-size:1.2rem; font-weight:800; color:#fff;">JELAJAH KEMUNING</span>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                <img src="/assets/uploads/cropped-logo-jelajah-kemuningg.png" alt="Logo Jelajah Kemuning" style="height:42px; width:42px; border-radius:8px; background:#fff; padding:2px;" onerror="this.style.display='none'">
+                <div>
+                    <div style="font-size:1.15rem; font-weight:800; color:#fff; line-height:1.15;">JELAJAH KEMUNING</div>
+                    <div style="font-size:11px; color:#86EFAC; font-weight:600; letter-spacing:0.04em;">CV RESMI • KARANGANYAR</div>
+                </div>
             </div>
-            <p style="font-size:13.5px; line-height:1.6; margin-bottom:16px;">
-                Penyedia paket wisata resmi Karanganyar: Jeep Adventure, River Tubing, Gathering Outbound, dan Sewa Villa. Dikelola CV resmi berizin berusaha (NIB: <?= Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458') ?>).
+            <p style="font-size:13.5px; line-height:1.65; margin-bottom:18px;">
+                Penyedia paket wisata resmi di Kemuning Karanganyar: Jeep Adventure 4x4, River Tubing, Gathering Outbound, dan Sewa Villa. Dikelola CV Jelajah Kemuning berizin resmi pemerintah.
             </p>
-            <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                <span class="badge-trust" style="background:#1F2937; color:#10B981; border-color:#374151;">Resmi NIB Pemerintah</span>
-                <span class="badge-trust" style="background:#1F2937; color:#10B981; border-color:#374151;">Tersedia Asuransi</span>
+            <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); padding:6px 12px; border-radius:6px; font-size:12px; color:#fff; font-family:var(--font-mono);">
+                <span>NIB: <?= Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458') ?></span>
             </div>
         </div>
 
         <div>
-            <h4 style="color:#fff; font-size:14px; font-weight:700; text-transform:uppercase; margin-bottom:14px;">Paket Wisata</h4>
-            <ul style="list-style:none; font-size:13.5px; display:flex; flex-direction:column; gap:8px;">
-                <li><a href="/jeep-adventure-kemuning/" style="color:#D1D5DB;">Jeep Adventure Kemuning</a></li>
-                <li><a href="/paket-outbound-kemuning/" style="color:#D1D5DB;">Paket Outbound Gathering</a></li>
-                <li><a href="/river-tubing-kemuning/" style="color:#D1D5DB;">River Tubing Kali Senatah</a></li>
-                <li><a href="/paket-hemat-jeep-kemuning/" style="color:#D1D5DB;">Paket Hemat Jeep (Include Makan)</a></li>
-                <li><a href="/villa-glamping-kemuning/" style="color:#D1D5DB;">Sewa Villa & Glamping Kemuning</a></li>
+            <h4 style="color:#fff; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;">Layanan Paket Wisata</h4>
+            <ul style="list-style:none; font-size:13.5px; display:flex; flex-direction:column; gap:10px;">
+                <li><a href="/jeep-adventure-kemuning/" style="color:rgba(255,255,255,0.8);">Jeep Adventure Kemuning</a></li>
+                <li><a href="/paket-outbound-kemuning/" style="color:rgba(255,255,255,0.8);">Paket Outbound & Gathering</a></li>
+                <li><a href="/river-tubing-kemuning/" style="color:rgba(255,255,255,0.8);">River Tubing Kali Senatah</a></li>
+                <li><a href="/paket-hemat-jeep-kemuning/" style="color:rgba(255,255,255,0.8);">Paket Hemat Jeep + Makan</a></li>
+                <li><a href="/villa-glamping-kemuning/" style="color:rgba(255,255,255,0.8);">Sewa Villa & Glamping 2D1N</a></li>
             </ul>
         </div>
 
         <div>
-            <h4 style="color:#fff; font-size:14px; font-weight:700; text-transform:uppercase; margin-bottom:14px;">Menu & Layanan</h4>
-            <ul style="list-style:none; font-size:13.5px; display:flex; flex-direction:column; gap:8px;">
-                <li><a href="/cari-paket/" style="color:#D1D5DB;">Kuis Rekomendasi Paket</a></li>
-                <li><a href="/proposal/" style="color:#D1D5DB;">Proposal Penawaran PDF</a></li>
-                <li><a href="/galeri/" style="color:#D1D5DB;">Galeri Dokumentasi Trip</a></li>
-                <li><a href="/artikel/" style="color:#D1D5DB;">Artikel & Tips Wisata</a></li>
-                <li><a href="/kontak/" style="color:#D1D5DB;">Kontak & Lokasi Meeting Point</a></li>
+            <h4 style="color:#fff; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;">Fitur & Informasi</h4>
+            <ul style="list-style:none; font-size:13.5px; display:flex; flex-direction:column; gap:10px;">
+                <li><a href="/cari-paket/" style="color:#FDBA74; font-weight:700;">Kuis Rekomendasi Paket</a></li>
+                <li><a href="/proposal/" style="color:rgba(255,255,255,0.8);">Cetak Proposal Kantor (PDF)</a></li>
+                <li><a href="/galeri/" style="color:rgba(255,255,255,0.8);">Galeri Dokumentasi Lapangan</a></li>
+                <li><a href="/artikel/" style="color:rgba(255,255,255,0.8);">Artikel & Tips Wisata Kemuning</a></li>
+                <li><a href="/kontak/" style="color:rgba(255,255,255,0.8);">Kontak & Lokasi Meeting Point</a></li>
             </ul>
         </div>
 
         <div>
-            <h4 style="color:#fff; font-size:14px; font-weight:700; text-transform:uppercase; margin-bottom:14px;">Kontak & Alamat</h4>
-            <p style="font-size:13.5px; line-height:1.6; margin-bottom:10px;">
+            <h4 style="color:#fff; font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;">Meeting Point & Reservasi</h4>
+            <p style="font-size:13.5px; line-height:1.65; margin-bottom:12px;">
                 Terminal Wisata Kemuning, Kec. Ngargoyoso, Kabupaten Karanganyar, Jawa Tengah 57793
             </p>
-            <p style="font-size:13.5px; margin-bottom:14px;">
-                WhatsApp: <strong style="color:#10B981;"><?= Helpers::getSetting('no_wa_1', defined('DEFAULT_WA') ? DEFAULT_WA : '6285171001566') ?></strong>
+            <p style="font-size:13.5px; margin-bottom:16px;">
+                WhatsApp Resmi: <strong style="color:#86EFAC; font-family:var(--font-mono);">0851-7100-1566</strong>
             </p>
-            <a href="<?= Helpers::generateWaLink() ?>" class="btn-wa" style="font-size:13px; padding:8px 16px;">
-                Chat WhatsApp Admin
+            <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent" style="width:100%; padding:11px 16px; font-size:13.5px;">
+                <span>Hubungi Admin via WhatsApp</span>
             </a>
         </div>
     </div>
 
-    <div class="container" style="margin-top:40px; padding-top:20px; border-top:1px solid #1F2937; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12px;">
+    <div class="container" style="margin-top:48px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:12.5px; color:rgba(255,255,255,0.6);">
         <div>
-            &copy; <?= date('Y') ?> CV Jelajah Kemuning. All rights reserved.
+            &copy; <?= date('Y') ?> CV Jelajah Kemuning. Seluruh hak cipta dilindungi.
         </div>
-        <div style="display:flex; gap:14px;">
-            <span>NIB: <?= Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458') ?></span>
+        <div style="display:flex; gap:16px;">
+            <a href="/sitemap.xml" style="color:rgba(255,255,255,0.6);">Sitemap XML</a>
             <span>•</span>
-            <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6);">Instagram</a>
             <span>•</span>
-            <a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.6);">TikTok</a>
         </div>
     </div>
 </footer>
