@@ -1,115 +1,143 @@
-<!-- Category Hero -->
-<section class="hero-section" style="padding:48px 0 56px;">
-    <div class="container" style="text-align:center; max-width:820px;">
-        <div class="hero-eyebrow">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>Resmi CV Jelajah Kemuning • NIB: <?= Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458') ?> • Berasuransi</span>
-        </div>
-        <h1 class="hero-h1" style="margin-bottom:14px;">
-            <?= Helpers::sanitize($category['name']) ?>
-        </h1>
-        <p class="hero-lead" style="margin:0 auto 28px; max-width:680px;">
-            <?= Helpers::sanitize($category['description'] ?? 'Penyedia paket wisata resmi Karanganyar dengan rute terbaik dan fasilitas terlengkap.') ?>
-        </p>
-        <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-            <a href="<?= Helpers::generateWaLink($category['name']) ?>" class="btn btn-accent">
-                <span>Konsultasi & Booking via WA</span>
-            </a>
-            <a href="/proposal/" class="btn btn-light">
-                <span>Unduh Proposal Kantor (PDF)</span>
-            </a>
+<!-- ============================================================
+     Category hero — compact documentary band
+     ============================================================ -->
+<section class="hero-section is-compact">
+    <div class="container hero-inner">
+        <div>
+            <div class="hero-eyebrow">Katalog · <?= count($packages) ?> paket tersedia</div>
+
+            <h1 class="hero-h1"><?= Helpers::sanitize($category['name']) ?></h1>
+
+            <p class="hero-lead">
+                <?= Helpers::sanitize($category['description'] ?? 'Penyedia paket wisata resmi Karanganyar dengan rute terbaik dan fasilitas terlengkap.') ?>
+            </p>
+
+            <div class="hero-cta-group">
+                <a href="<?= Helpers::generateWaLink($category['name']) ?>" class="btn btn-accent">
+                    <span>Konsultasi &amp; booking</span>
+                </a>
+                <a href="/proposal/" class="hero-link">
+                    Proposal kantor (PDF)
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+
+            <div class="hero-stats-row" style="margin-top:34px;">
+                <div class="hero-stat">
+                    <div class="hero-stat-num"><?= count($packages) ?></div>
+                    <div class="hero-stat-label">Pilihan paket</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">NIB</div>
+                    <div class="hero-stat-label">Badan usaha resmi</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">Asuransi</div>
+                    <div class="hero-stat-label">Tiap rombongan</div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Packages Grid -->
-<section class="section-block">
+<!-- ============================================================
+     Package entries — ruled editorial list
+     ============================================================ -->
+<section class="page-body no-rule">
     <div class="container">
-        <div class="section-header-center">
-            <span class="section-eyebrow">Daftar Paket & Rincian Rute</span>
-            <h2 class="section-title">Pilihan Paket <?= Helpers::sanitize($category['name']) ?></h2>
-            <p class="section-desc">Pilih durasi, rute perjalanan, dan fasilitas yang paling sesuai dengan rombongan kamu.</p>
+        <div class="section-header">
+            <div>
+                <div class="section-eyebrow">Daftar paket &amp; rincian rute</div>
+                <h2 class="section-title">Pilihan paket <?= Helpers::sanitize($category['name']) ?></h2>
+                <p class="section-desc">Pilih durasi, rute perjalanan, dan fasilitas yang paling sesuai dengan rombongan kamu.</p>
+            </div>
         </div>
 
         <div class="packages-grid">
-            <?php foreach ($packages as $pkg):
+            <?php $pkgIndex = 0; foreach ($packages as $pkg):
+                $pkgIndex++;
                 $thumb = $pkg['thumbnail'] ?? '';
-                $isBanner = str_contains($thumb, 'foto-paket-') || str_contains($thumb, 'paket-combo-');
+                $incList = (new PackageController())->parseInclusions($pkg['inclusions'] ?? '');
             ?>
-            <div class="card-package <?= ($pkg['badge'] ?? '') === 'TERLARIS' ? 'is-featured' : '' ?>">
-                <div>
-                    <?php if (!empty($thumb)): ?>
-                    <div class="card-thumb-wrap <?= $isBanner ? '' : 'ratio-16-9' ?>">
-                        <img src="<?= htmlspecialchars($thumb) ?>" alt="<?= Helpers::sanitize($pkg['name']) ?>" loading="lazy">
-                    </div>
+            <article class="detail-entry">
+                <div class="detail-head">
+                    <span class="detail-index"><?= str_pad((string)$pkgIndex, 2, '0', STR_PAD_LEFT) ?> / <?= $pkg['price_type'] === 'per_armada' ? 'PER JEEP' : 'PER ORANG' ?></span>
+                    <?php if (!empty($pkg['badge'])): ?>
+                    <span class="detail-index" style="color:var(--accent);"><?= Helpers::sanitize($pkg['badge']) ?></span>
                     <?php endif; ?>
+                    <?php if (!empty($pkg['duration'])): ?>
+                    <span class="detail-index">± <?= Helpers::sanitize($pkg['duration']) ?></span>
+                    <?php endif; ?>
+                </div>
 
-                    <div class="card-body">
-                        <div>
-                            <div class="card-meta-top">
-                                <?php if (!empty($pkg['badge'])): ?>
-                                <span class="pill-badge <?= ($pkg['badge'] === 'TERLARIS') ? 'accent' : '' ?>"><?= Helpers::sanitize($pkg['badge']) ?></span>
-                                <?php else: ?>
-                                <span class="pill-badge">Tersedia</span>
-                                <?php endif; ?>
+                <h2 class="detail-title"><?= Helpers::sanitize($pkg['name']) ?></h2>
 
-                                <?php if (!empty($pkg['duration'])): ?>
-                                <span class="card-duration">Durasi ± <?= Helpers::sanitize($pkg['duration']) ?></span>
-                                <?php endif; ?>
-                            </div>
+                <?php if (!empty($thumb)): ?>
+                <div class="detail-media">
+                    <img src="<?= htmlspecialchars($thumb) ?>" alt="<?= Helpers::sanitize($pkg['name']) ?>" loading="lazy" decoding="async">
+                </div>
+                <?php endif; ?>
 
-                            <h3 class="card-title"><?= Helpers::sanitize($pkg['name']) ?></h3>
-
-                            <div class="card-price-box">
-                                <div>
-                                    <span class="card-price-label">Harga Paket</span>
-                                    <span class="card-price"><?= Helpers::formatRupiah($pkg['price']) ?></span>
-                                    <span class="card-price-unit">/ <?= $pkg['price_type'] === 'per_armada' ? 'Jeep' : 'Orang' ?></span>
-                                </div>
-                                <?php if ($pkg['price_type'] === 'per_armada'): ?>
-                                <span class="card-min-pax">Maks. 4 Orang</span>
-                                <?php elseif (!empty($pkg['min_participants']) && $pkg['min_participants'] > 1): ?>
-                                <span class="card-min-pax">Min. <?= $pkg['min_participants'] ?> Peserta</span>
-                                <?php endif; ?>
-                            </div>
-
-                            <?php if (!empty($pkg['itinerary'])): ?>
-                            <div class="itinerary-box">
-                                <strong>Rute Perjalanan:</strong>
-                                <?= nl2br(Helpers::sanitize(str_replace(['\r\n', '\r', '\n'], "\n", $pkg['itinerary']))) ?>
-                            </div>
-                            <?php endif; ?>
-
-                            <div style="font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--text-muted); margin:12px 0 8px;">Fasilitas Termasuk:</div>
-                            <ul class="facility-list">
-                                <?php
-                                $incList = (new PackageController())->parseInclusions($pkg['inclusions'] ?? '');
-                                if (empty($incList)): ?>
-                                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Fasilitas lengkap standar CV Jelajah Kemuning.</span></li>
-                                <?php else:
-                                    foreach ($incList as $inc): ?>
-                                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><?= Helpers::sanitize($inc) ?></span></li>
-                                <?php endforeach; endif; ?>
-                            </ul>
-                        </div>
-
-                        <a href="<?= Helpers::generateWaLink($pkg['name'], Helpers::formatRupiah($pkg['price'])) ?>" class="btn btn-primary" style="width:100%;">
-                            <span>Booking Paket Ini via WA</span>
-                        </a>
+                <div class="detail-price-row">
+                    <div class="pkg-row-price">
+                        <?= Helpers::formatRupiah($pkg['price']) ?>
+                        <small>/ <?= $pkg['price_type'] === 'per_armada' ? 'jeep' : 'orang' ?></small>
+                    </div>
+                    <div class="pkg-row-facts">
+                        <?php if ($pkg['price_type'] === 'per_armada'): ?>
+                        <span>Maks 4 orang per jeep</span>
+                        <?php elseif (!empty($pkg['min_participants']) && $pkg['min_participants'] > 1): ?>
+                        <span>Min. <?= (int)$pkg['min_participants'] ?> peserta</span>
+                        <?php endif; ?>
+                        <span>Include asuransi</span>
                     </div>
                 </div>
-            </div>
+
+                <div class="detail-cols">
+                    <div>
+                        <?php if (!empty($pkg['itinerary'])): ?>
+                        <div class="itinerary-box">
+                            <strong>Rute perjalanan</strong>
+                            <?= nl2br(Helpers::sanitize(str_replace(['\r\n', '\r', '\n'], "\n", $pkg['itinerary']))) ?>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div>
+                        <div class="overline" style="color:var(--ink-faint); margin-bottom:12px;">Fasilitas termasuk</div>
+                        <ul class="facility-list">
+                            <?php if (empty($incList)): ?>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span>Fasilitas lengkap standar CV Jelajah Kemuning.</span></li>
+                            <?php else: foreach ($incList as $inc): ?>
+                            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span><?= Helpers::sanitize($inc) ?></span></li>
+                            <?php endforeach; endif; ?>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="detail-foot">
+                    <a href="<?= Helpers::generateWaLink($pkg['name'], Helpers::formatRupiah($pkg['price'])) ?>" class="btn btn-primary">
+                        <span>Booking paket ini</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </a>
+                    <a href="/proposal/" class="btn btn-outline">Masukkan ke proposal</a>
+                </div>
+            </article>
             <?php endforeach; ?>
         </div>
     </div>
 </section>
 
-<!-- FAQ Section -->
-<section class="section-block" style="background:#FFFFFF; border-top:1px solid var(--border);">
-    <div class="container" style="max-width:820px;">
-        <div class="section-header-center" style="margin-bottom:28px;">
-            <span class="section-eyebrow">Informasi Penting</span>
-            <h2 class="section-title">Tanya Jawab Seputar <?= Helpers::sanitize($category['name']) ?></h2>
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="section-block">
+    <div class="container" style="max-width:860px;">
+        <div class="section-header">
+            <div>
+                <div class="section-eyebrow">Informasi penting</div>
+                <h2 class="section-title">Tanya jawab seputar <?= Helpers::sanitize($category['name']) ?></h2>
+            </div>
         </div>
 
         <div class="faq-box">

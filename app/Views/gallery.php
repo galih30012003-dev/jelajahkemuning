@@ -1,28 +1,61 @@
-<section class="hero-section" style="padding:48px 0 56px;">
-    <div class="container" style="text-align:center; max-width:740px;">
-        <div class="hero-eyebrow">
-            <span>Dokumentasi Asli Lapangan</span>
+<!-- ============================================================
+     Gallery hero — compact documentary band
+     ============================================================ -->
+<section class="hero-section is-compact">
+    <div class="container hero-inner">
+        <div>
+            <div class="hero-eyebrow">Dokumentasi asli lapangan</div>
+
+            <h1 class="hero-h1">Galeri trip yang<br>benar-benar jalan.</h1>
+
+            <p class="hero-lead">
+                Koleksi foto asli keseruan rombongan kantor, dinas, komunitas, dan keluarga yang telah berlibur bersama CV Jelajah Kemuning. Klik foto untuk memperbesar.
+            </p>
+
+            <div class="hero-stats-row" style="margin-top:34px;">
+                <div class="hero-stat">
+                    <div class="hero-stat-num"><?= count($galleries) ?></div>
+                    <div class="hero-stat-label">Foto lapangan</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">4 spot</div>
+                    <div class="hero-stat-label">Jeep · tubing · outbound · villa</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">Asli</div>
+                    <div class="hero-stat-label">Tanpa foto stok</div>
+                </div>
+            </div>
         </div>
-        <h1 class="hero-h1" style="margin-bottom:12px;">
-            Galeri Dokumentasi Wisata Kemuning
-        </h1>
-        <p class="hero-lead" style="margin:0 auto;">
-            Koleksi foto asli keseruan rombongan kantor, dinas, komunitas, dan keluarga yang telah berlibur bersama CV Jelajah Kemuning. Klik foto untuk memperbesar.
-        </p>
     </div>
 </section>
 
-<div class="container" style="padding:56px 24px;">
-    <div class="gallery-grid">
+<div class="page-body no-rule">
+    <div class="container">
         <?php if (empty($galleries)): ?>
-        <div style="background:#fff; border:1px solid var(--border); border-radius:12px; padding:32px; text-align:center; grid-column:1/-1; color:var(--text-muted);">
-            Foto dokumentasi terbaru sedang disinkronkan.
+        <div class="empty-state">Foto dokumentasi terbaru sedang disinkronkan.</div>
+        <?php else: ?>
+        <div class="gallery-grid">
+            <?php $galIndex = 0; foreach ($galleries as $gal): $galIndex++; ?>
+            <div class="gallery-item">
+                <img src="<?= htmlspecialchars($gal['image_url']) ?>" alt="<?= htmlspecialchars($gal['title']) ?>" loading="<?= $galIndex <= 4 ? 'eager' : 'lazy' ?>" decoding="async">
+                <div class="gallery-caption"><?= htmlspecialchars($gal['title']) ?></div>
+            </div>
+            <?php endforeach; ?>
         </div>
-        <?php else: foreach ($galleries as $gal): ?>
-        <div class="gallery-item">
-            <img src="<?= htmlspecialchars($gal['image_url']) ?>" alt="<?= htmlspecialchars($gal['title']) ?>" loading="lazy">
-            <div class="gallery-caption"><?= htmlspecialchars($gal['title']) ?></div>
+        <?php endif; ?>
+
+        <div class="page-cta">
+            <div>
+                <div class="section-eyebrow" style="margin-bottom:12px;">Mau trip berikutnya jadi bagian galeri?</div>
+                <h2 class="section-title" style="font-size:clamp(1.4rem,2.4vw,1.9rem); margin-bottom:0;">Rombongan kamu bisa ikut di sini.</h2>
+            </div>
+            <div class="page-cta-actions">
+                <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent">
+                    <span>Chat admin</span>
+                </a>
+                <a href="/cari-paket/" class="btn btn-outline">Cari paket dulu</a>
+            </div>
         </div>
-        <?php endforeach; endif; ?>
     </div>
 </div>

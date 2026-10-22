@@ -1,105 +1,112 @@
-<section class="hero-section" style="padding:48px 0 56px;">
-    <div class="container" style="text-align:center; max-width:740px;">
-        <div class="hero-eyebrow">
-            <span>Kuis Rekomendasi Paket Rombongan</span>
+<section class="page-head">
+    <div class="container">
+        <div class="page-head-inner">
+            <div class="section-eyebrow">Kuis rekomendasi paket rombongan</div>
+            <h1>Pilih paket sesuai<br>kebutuhan rombongan.</h1>
+            <p class="lede">
+                Jawab tiga pertanyaan singkat berikut untuk mendapatkan rekomendasi paket dan estimasi biaya secara cepat — tanpa perlu menunggu balasan admin.
+            </p>
+            <div class="page-meta">
+                <span>3 langkah</span>
+                <span>± 30 detik</span>
+                <span>Langsung ke WhatsApp</span>
+            </div>
         </div>
-        <h1 class="hero-h1" style="margin-bottom:12px;">
-            Pilih Paket Wisata Sesuai Kebutuhan Rombongan
-        </h1>
-        <p class="hero-lead" style="margin:0 auto;">
-            Jawab 3 pertanyaan singkat berikut untuk mendapatkan rekomendasi paket dan estimasi biaya secara cepat.
-        </p>
     </div>
 </section>
 
-<div class="container" style="max-width:700px; padding:56px 20px;">
-    <div style="background:#fff; border:1px solid var(--border); border-radius:var(--radius-md); padding:32px; box-shadow:var(--shadow-md);">
+<div class="page-body">
+    <div class="container">
+        <div class="quiz-panel" style="max-width:760px;">
 
-        <!-- Step 1 -->
-        <div id="quiz-step-1" class="step-1">
-            <span class="section-eyebrow">Langkah 1 dari 3</span>
-            <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-bottom:18px;">Siapa saja yang akan ikut liburan?</h3>
+            <!-- Step 1 -->
+            <div id="quiz-step-1" class="step-1">
+                <div class="section-eyebrow" style="margin-bottom:16px;">Langkah 1 dari 3</div>
+                <h2 class="section-title" style="font-size:clamp(1.25rem,2vw,1.6rem); margin-bottom:22px;">Siapa saja yang akan ikut liburan?</h2>
 
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-                <div class="quiz-opt card-package selected" onclick="selectOption(1, 'group', 'keluarga', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Keluarga Besar</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Santai, nyaman untuk anak-anak & lansia</div>
+                <div class="quiz-grid">
+                    <button type="button" class="quiz-opt selected" onclick="selectOption(1, 'group', 'keluarga', this)">
+                        <span class="quiz-opt-title">Keluarga besar</span>
+                        <span class="quiz-opt-sub">Santai, nyaman untuk anak-anak &amp; lansia</span>
+                    </button>
+                    <button type="button" class="quiz-opt" onclick="selectOption(1, 'group', 'kantor', this)">
+                        <span class="quiz-opt-title">Kantor / instansi</span>
+                        <span class="quiz-opt-sub">Gathering, team building &amp; SPJ resmi</span>
+                    </button>
+                    <button type="button" class="quiz-opt" onclick="selectOption(1, 'group', 'komunitas', this)">
+                        <span class="quiz-opt-title">Komunitas / teman</span>
+                        <span class="quiz-opt-sub">Offroad seru &amp; tantangan alam</span>
+                    </button>
+                    <button type="button" class="quiz-opt" onclick="selectOption(1, 'group', 'pasangan', this)">
+                        <span class="quiz-opt-title">Pasangan / berdua</span>
+                        <span class="quiz-opt-sub">Private trip kebun teh &amp; sunset</span>
+                    </button>
                 </div>
-                <div class="quiz-opt card-package" onclick="selectOption(1, 'group', 'kantor', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Kantor / Instansi</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Gathering, team building & SPJ resmi</div>
-                </div>
-                <div class="quiz-opt card-package" onclick="selectOption(1, 'group', 'komunitas', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Komunitas / Teman</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Offroad seru & tantangan alam</div>
-                </div>
-                <div class="quiz-opt card-package" onclick="selectOption(1, 'group', 'pasangan', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Pasangan / Berdua</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Private trip kebun teh & sunset</div>
-                </div>
-            </div>
-            <button class="btn btn-primary" onclick="nextStep(1, 2)" style="margin-top:24px; width:100%;">
-                <span>Lanjut ke Langkah 2 →</span>
-            </button>
-        </div>
 
-        <!-- Step 2 -->
-        <div id="quiz-step-2" class="step-2" style="display:none;">
-            <span class="section-eyebrow">Langkah 2 dari 3</span>
-            <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-bottom:18px;">Aktivitas apa yang paling diminati?</h3>
-
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-                <div class="quiz-opt card-package selected" onclick="selectOption(2, 'activity', 'jeep', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Jeep Adventure 4x4</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Susur sungai lumpur, kebun teh & Paralayang</div>
-                </div>
-                <div class="quiz-opt card-package" onclick="selectOption(2, 'activity', 'tubing', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">River Tubing</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Menyusuri arus air segar Kali Senatah</div>
-                </div>
-                <div class="quiz-opt card-package" onclick="selectOption(2, 'activity', 'outbound', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Outbound & Fun Games</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Games kekompakan bersama fasilitator</div>
-                </div>
-                <div class="quiz-opt card-package" onclick="selectOption(2, 'activity', 'villa', this)" style="padding:18px; cursor:pointer;">
-                    <strong style="font-size:14.5px; color:var(--text-main); display:block;">Menginap di Villa</strong>
-                    <div style="font-size:12.5px; color:var(--text-muted); margin-top:4px;">Paket menginap 2D1N di kebun teh</div>
+                <div class="quiz-step-nav">
+                    <button type="button" class="btn btn-primary" onclick="nextStep(1, 2)">
+                        <span>Lanjut ke langkah 2</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
                 </div>
             </div>
-            <div style="margin-top:24px; display:flex; gap:10px;">
-                <button class="btn btn-outline" onclick="nextStep(2, 1)">
-                    ← Kembali
-                </button>
-                <button class="btn btn-primary" onclick="nextStep(2, 3)" style="flex:1;">
-                    Lihat Rekomendasi →
-                </button>
+
+            <!-- Step 2 -->
+            <div id="quiz-step-2" class="step-2" style="display:none;">
+                <div class="section-eyebrow" style="margin-bottom:16px;">Langkah 2 dari 3</div>
+                <h2 class="section-title" style="font-size:clamp(1.25rem,2vw,1.6rem); margin-bottom:22px;">Aktivitas apa yang paling diminati?</h2>
+
+                <div class="quiz-grid">
+                    <button type="button" class="quiz-opt selected" onclick="selectOption(2, 'activity', 'jeep', this)">
+                        <span class="quiz-opt-title">Jeep Adventure 4×4</span>
+                        <span class="quiz-opt-sub">Susur sungai lumpur, kebun teh &amp; paralayang</span>
+                    </button>
+                    <button type="button" class="quiz-opt" onclick="selectOption(2, 'activity', 'tubing', this)">
+                        <span class="quiz-opt-title">River tubing</span>
+                        <span class="quiz-opt-sub">Menyusuri arus air segar Kali Senatah</span>
+                    </button>
+                    <button type="button" class="quiz-opt" onclick="selectOption(2, 'activity', 'outbound', this)">
+                        <span class="quiz-opt-title">Outbound &amp; fun games</span>
+                        <span class="quiz-opt-sub">Games kekompakan bersama fasilitator</span>
+                    </button>
+                    <button type="button" class="quiz-opt" onclick="selectOption(2, 'activity', 'villa', this)">
+                        <span class="quiz-opt-title">Menginap di villa</span>
+                        <span class="quiz-opt-sub">Paket menginap 2D1N di kebun teh</span>
+                    </button>
+                </div>
+
+                <div class="quiz-step-nav">
+                    <button type="button" class="btn btn-outline" onclick="nextStep(2, 1)">Kembali</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2, 3)">
+                        <span>Lihat rekomendasi</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                </div>
             </div>
-        </div>
 
-        <!-- Step 3 -->
-        <div id="quiz-step-3" class="step-3" style="display:none;">
-            <span class="section-eyebrow">Langkah 3 dari 3</span>
-            <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-main); margin-bottom:16px;">Jumlah peserta rombongan:</h3>
+            <!-- Step 3 -->
+            <div id="quiz-step-3" class="step-3" style="display:none;">
+                <div class="section-eyebrow" style="margin-bottom:16px;">Langkah 3 dari 3</div>
+                <h2 class="section-title" style="font-size:clamp(1.25rem,2vw,1.6rem); margin-bottom:22px;">Jumlah peserta rombongan</h2>
 
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
-                <input type="number" id="quiz-participants-input" value="16" min="1" max="500" class="qf-input" style="width:130px; text-align:center; font-size:17px;" oninput="calculateRecommendation()">
-                <span style="font-size:14.5px; font-weight:600; color:var(--text-muted);">Orang Peserta</span>
-            </div>
+                <div class="field" style="max-width:260px;">
+                    <label for="quiz-participants-input">Jumlah peserta (orang)</label>
+                    <input type="number" id="quiz-participants-input" value="16" min="1" max="500" class="qf-input on-paper" oninput="calculateRecommendation()">
+                </div>
 
-            <div style="background:var(--bg-canvas); border:1px solid var(--border-strong); border-radius:var(--radius-sm); padding:24px; text-align:center;">
-                <div style="font-size:11.5px; font-weight:800; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">Rekomendasi Paket Terbaik:</div>
-                <h2 id="rec-title" style="font-size:1.35rem; font-weight:800; color:var(--primary); margin-bottom:6px;">Paket Combo (Jeep + Outbound + Tubing)</h2>
-                <div id="rec-price" style="font-family:var(--font-mono); font-size:1.45rem; font-weight:700; color:var(--accent); margin-bottom:18px;">Estimasi: Rp 185.000 / orang</div>
+                <div class="quiz-result">
+                    <div class="quiz-result-label">Rekomendasi paket terbaik</div>
+                    <h3 id="rec-title" style="font-size:clamp(1.15rem,1.8vw,1.4rem); margin-bottom:8px; color:var(--ink);">Paket Combo (Jeep + Outbound + Tubing)</h3>
+                    <div id="rec-price" class="mono" style="font-size:1.3rem; font-weight:500; color:var(--accent); letter-spacing:-0.02em; margin-bottom:22px;">Estimasi: Rp 185.000 / orang</div>
 
-                <a id="rec-wa-btn" href="#" class="btn btn-accent" style="width:100%;">
-                    <span>Konsultasikan Paket Ini via WhatsApp</span>
-                </a>
-            </div>
+                    <a id="rec-wa-btn" href="#" class="btn btn-accent" style="width:100%;">
+                        <span>Konsultasikan paket ini via WhatsApp</span>
+                    </a>
+                </div>
 
-            <div style="margin-top:16px; text-align:center;">
-                <button onclick="nextStep(3, 2)" style="background:none; border:none; color:var(--text-muted); font-size:13px; font-weight:600; cursor:pointer;">
-                    ← Ubah Pilihan Aktivitas
-                </button>
+                <div class="quiz-step-nav" style="justify-content:flex-start;">
+                    <button type="button" class="quiz-back" onclick="nextStep(3, 2)">← Ubah pilihan aktivitas</button>
+                </div>
             </div>
         </div>
     </div>

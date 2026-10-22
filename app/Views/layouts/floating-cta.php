@@ -1,8 +1,4 @@
 <div class="sticky-bottom-cta">
-    <a href="/cari-paket/" class="btn-outline" style="flex:1; justify-content:center; font-size:13px;">
-        Kuis Paket
-    </a>
-    <a href="<?= Helpers::generateWaLink() ?>" class="btn-wa" style="flex:1.3; justify-content:center; font-size:13.5px;">
-        Chat WhatsApp
-    </a>
+    <a href="/cari-paket/" class="btn btn-outline" style="flex:1;">Kuis paket</a>
+    <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent" style="flex:1.4;">Chat WhatsApp</a>
 </div>

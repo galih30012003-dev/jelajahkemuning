@@ -5,6 +5,14 @@ $rawGtmId = Helpers::getSetting('gtm_id');
 $gtmId = preg_replace('/[^A-Za-z0-9-]/', '', $rawGtmId);
 $waPhone = Helpers::getSetting('no_wa_1', defined('DEFAULT_WA') ? DEFAULT_WA : '6285171001566');
 $nibNum = Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458');
+$currentPath = rtrim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/', '/');
+if ($currentPath === '') $currentPath = '/';
+$isActive = static function (array $prefixes) use ($currentPath): string {
+    foreach ($prefixes as $p) {
+        if ($p === '/' ? $currentPath === '/' : str_starts_with($currentPath, $p)) return ' is-active';
+    }
+    return '';
+};
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -28,121 +36,118 @@ $nibNum = Helpers::getSetting('nib', defined('CV_NIB') ? CV_NIB : '0705250012458
 </head>
 <body>
 
-<!-- Top Credibility & Legal Bar -->
+<!-- Utility strip -->
 <div class="topbar">
     <div class="container topbar-inner">
-        <div class="topbar-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86EFAC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            <span>Dikelola Resmi <strong>CV Jelajah Kemuning</strong></span>
-            <span class="topbar-badge">NIB: <?= Helpers::sanitize($nibNum) ?></span>
-        </div>
-        <div style="display:flex; gap:18px; align-items:center;">
+        <div class="topbar-left">
             <span class="topbar-item">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Operator resmi <strong>CV Jelajah Kemuning</strong></span>
+                <span class="topbar-badge">NIB <?= Helpers::sanitize($nibNum) ?></span>
+            </span>
+        </div>
+        <div class="topbar-right">
+            <span class="topbar-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 Terminal Wisata Kemuning, Karanganyar
             </span>
-            <a href="<?= Helpers::generateWaLink() ?>" class="topbar-item" style="color:#86EFAC; font-weight:700;">
-                WhatsApp: 0851-7100-1566
-            </a>
+            <a href="<?= Helpers::generateWaLink() ?>" class="topbar-item topbar-wa">WA 0851-7100-1566</a>
         </div>
     </div>
 </div>
 
-<!-- Main Sticky Header -->
+<!-- Header -->
 <header class="header-nav">
     <div class="container header-container">
-        <a href="/" class="brand-logo">
+        <a href="/" class="brand-logo" aria-label="Jelajah Kemuning — beranda">
             <img src="/assets/uploads/cropped-logo-jelajah-kemuningg.png" alt="Logo CV Jelajah Kemuning" onerror="this.style.display='none'">
-            <div class="brand-text-wrap">
-                <span class="brand-name">JELAJAH KEMUNING</span>
-                <span class="brand-sub">Official Tour & Outbound</span>
-            </div>
+            <span class="brand-text-wrap">
+                <span class="brand-name">Jelajah Kemuning</span>
+                <span class="brand-sub">Tour &amp; Outbound · Karanganyar</span>
+            </span>
         </a>
 
-        <nav class="nav-links">
-            <a href="/" class="nav-item">Beranda</a>
+        <nav class="nav-links" aria-label="Navigasi utama">
+            <a href="/" class="nav-item<?= $isActive(['/']) ?>">Beranda</a>
 
             <div class="nav-dropdown">
-                <a href="#katalog-paket" class="nav-item">
-                    <span>Paket Wisata</span>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+                <a href="#katalog-paket" class="nav-item<?= $isActive(['/jeep-adventure-kemuning', '/river-tubing-kemuning', '/paket-outbound-kemuning', '/paket-hemat-jeep-kemuning', '/villa-glamping-kemuning']) ?>">
+                    <span>Paket</span>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
                 </a>
                 <div class="nav-dropdown-menu">
                     <a href="/jeep-adventure-kemuning/" class="dropdown-link">
-                        <div>
-                            <span class="dropdown-link-title">Jeep Adventure 4x4</span>
-                            <span class="dropdown-link-sub">Offroad Kebun Teh & Sungai</span>
-                        </div>
-                        <span class="dropdown-link-price">350rb/Jeep</span>
+                        <span>
+                            <span class="dropdown-link-title">Jeep Adventure 4×4</span>
+                            <span class="dropdown-link-sub">Offroad kebun teh &amp; susur sungai</span>
+                        </span>
+                        <span class="dropdown-link-price">350rb/jeep</span>
                     </a>
                     <a href="/paket-outbound-kemuning/" class="dropdown-link">
-                        <div>
-                            <span class="dropdown-link-title">Outbound & Gathering</span>
-                            <span class="dropdown-link-sub">Fun Games, Makan & Aula</span>
-                        </div>
-                        <span class="dropdown-link-price">90rb/Org</span>
+                        <span>
+                            <span class="dropdown-link-title">Outbound &amp; Gathering</span>
+                            <span class="dropdown-link-sub">Fun games, makan &amp; aula</span>
+                        </span>
+                        <span class="dropdown-link-price">90rb/org</span>
                     </a>
                     <a href="/river-tubing-kemuning/" class="dropdown-link">
-                        <div>
-                            <span class="dropdown-link-title">River Tubing Kemuning</span>
-                            <span class="dropdown-link-sub">Kali Guci, Senatah & Pring Kuning</span>
-                        </div>
-                        <span class="dropdown-link-price">45rb/Org</span>
+                        <span>
+                            <span class="dropdown-link-title">River Tubing</span>
+                            <span class="dropdown-link-sub">Kali Guci, Senatah &amp; Pring Kuning</span>
+                        </span>
+                        <span class="dropdown-link-price">45rb/org</span>
                     </a>
                     <a href="/paket-hemat-jeep-kemuning/" class="dropdown-link">
-                        <div>
+                        <span>
                             <span class="dropdown-link-title">Paket Hemat Jeep</span>
-                            <span class="dropdown-link-sub">Hitungan Per Orang + Makan</span>
-                        </div>
-                        <span class="dropdown-link-price">165rb/Org</span>
+                            <span class="dropdown-link-sub">Per orang, sudah termasuk makan</span>
+                        </span>
+                        <span class="dropdown-link-price">165rb/org</span>
                     </a>
                     <a href="/villa-glamping-kemuning/" class="dropdown-link">
-                        <div>
-                            <span class="dropdown-link-title">Villa & Glamping 2D1N</span>
-                            <span class="dropdown-link-sub">Menginap di Lereng Lawu</span>
-                        </div>
-                        <span class="dropdown-link-price">350rb/Org</span>
+                        <span>
+                            <span class="dropdown-link-title">Villa &amp; Glamping 2D1N</span>
+                            <span class="dropdown-link-sub">Menginap di lereng Lawu</span>
+                        </span>
+                        <span class="dropdown-link-price">350rb/org</span>
                     </a>
                 </div>
             </div>
 
-            <a href="/cari-paket/" class="nav-item">Rekomendasi Paket</a>
-            <a href="/proposal/" class="nav-item">Proposal Kantor</a>
-            <a href="/galeri/" class="nav-item">Galeri Trip</a>
-            <a href="/artikel/" class="nav-item">Artikel</a>
-            <a href="/kontak/" class="nav-item">Kontak</a>
+            <a href="/cari-paket/" class="nav-item<?= $isActive(['/cari-paket']) ?>">Rekomendasi</a>
+            <a href="/proposal/" class="nav-item<?= $isActive(['/proposal']) ?>">Proposal</a>
+            <a href="/galeri/" class="nav-item<?= $isActive(['/galeri']) ?>">Galeri</a>
+            <a href="/artikel/" class="nav-item<?= $isActive(['/artikel']) ?>">Artikel</a>
+            <a href="/kontak/" class="nav-item<?= $isActive(['/kontak', '/tentang-kami']) ?>">Kontak</a>
         </nav>
 
         <div class="header-actions">
-            <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent" style="padding:10px 18px; font-size:13.5px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <span>Konsultasi WA</span>
+            <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <span>Booking WA</span>
             </a>
         </div>
 
-        <button id="mobile-menu-btn" style="background:none; border:1px solid var(--border); border-radius:8px; width:42px; height:42px; display:flex; align-items:center; justify-content:center; color:var(--text-main); cursor:pointer;" aria-label="Menu">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <button id="mobile-menu-btn" class="menu-btn" aria-label="Buka menu" aria-expanded="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
         </button>
     </div>
 
-    <!-- Mobile Drawer Nav -->
-    <div id="mobile-nav" class="hidden" style="background:#fff; border-top:1px solid var(--border); padding:20px;">
-        <div style="display:flex; flex-direction:column; gap:12px; font-size:14.5px; font-weight:600;">
-            <a href="/jeep-adventure-kemuning/">Jeep Adventure Kemuning (Mulai Rp 300rb)</a>
-            <a href="/paket-outbound-kemuning/">Paket Outbound Gathering (Mulai Rp 80rb)</a>
-            <a href="/river-tubing-kemuning/">River Tubing Kali Senatah (Mulai Rp 50rb)</a>
-            <a href="/paket-hemat-jeep-kemuning/">Paket Hemat Jeep + Makan (Mulai Rp 150rb)</a>
-            <a href="/villa-glamping-kemuning/">Sewa Villa & Glamping 2D1N (Mulai Rp 350rb)</a>
-            <hr style="border:none; border-top:1px solid var(--border);">
-            <a href="/cari-paket/">Kuis Pilih Paket Rombongan</a>
-            <a href="/proposal/">Unduh Proposal Penawaran PDF</a>
-            <a href="/galeri/">Galeri Dokumentasi Trip</a>
-            <a href="/artikel/">Artikel & Panduan Wisata</a>
-            <a href="/kontak/">Kontak & Meeting Point</a>
-            <div style="margin-top:8px;">
-                <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent" style="width:100%;">
-                    Chat WhatsApp Admin (0851-7100-1566)
-                </a>
+    <div id="mobile-nav" class="hidden">
+        <div class="container">
+            <a href="/">Beranda</a>
+            <a href="/jeep-adventure-kemuning/">Jeep Adventure — 350rb/jeep</a>
+            <a href="/paket-outbound-kemuning/">Outbound &amp; Gathering — 90rb/org</a>
+            <a href="/river-tubing-kemuning/">River Tubing — 45rb/org</a>
+            <a href="/paket-hemat-jeep-kemuning/">Paket Hemat Jeep — 165rb/org</a>
+            <a href="/villa-glamping-kemuning/">Villa &amp; Glamping 2D1N — 350rb/org</a>
+            <a href="/cari-paket/">Kuis pilih paket</a>
+            <a href="/proposal/">Proposal penawaran PDF</a>
+            <a href="/galeri/">Galeri trip</a>
+            <a href="/artikel/">Artikel</a>
+            <a href="/kontak/">Kontak &amp; meeting point</a>
+            <div style="margin-top:16px;">
+                <a href="<?= Helpers::generateWaLink() ?>" class="btn btn-accent" style="width:100%;">Chat WhatsApp admin</a>
             </div>
         </div>
     </div>

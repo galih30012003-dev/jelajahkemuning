@@ -1,264 +1,259 @@
 {
   "meta": {
-    "name": "Kemuning Signature — Highland Eco-Adventure & Corporate Resort",
-    "description": "Three-dimensional Design DNA profile for JelajahKemuning.com combining lush Mount Lawu tea-plantation emerald tones, high-conversion terracotta adventure accents, real trip photography, glassmorphic surfaces, and interactive Canvas 2D highland mist particles.",
+    "name": "Kemuning Editorial Adventure — Highland Operator Bold",
+    "description": "Design DNA for JelajahKemuning.com: a printed-expedition-catalogue aesthetic. Paper-ground canvas, near-black ink, one hot terracotta accent, oversized condensed display type, hairline rules instead of shadows, full-bleed documentary photography, and monospace numerals for prices and route labels. Built to read like an operator that actually runs the trips, not like a SaaS landing page.",
     "source_references": [
-      "https://jelajahkemuning.com",
-      "https://jelajahkemuning.com/jeep-adventure-kemuning/",
-      "https://jelajahkemuning.com/paket-outbound-kemuning/",
-      "https://jelajahkemuning.com/river-tubing-kemuning/"
+      "https://www.intrepidtravel.com",
+      "https://www.gadventures.com",
+      "https://www.patagonia.com",
+      "internal: current jelajahkemuning.com homepage audit (2026-10-22 render)"
     ],
-    "created_at": "2026-10-22"
+    "created_at": "2026-10-23"
   },
   "design_system": {
     "color": {
       "palette_type": "split-complementary",
       "primary": {
-        "hex": "#0B3B24",
-        "role": "Deep Tea Emerald for brand authority, hero immersion, and primary headings"
+        "hex": "#0E2E20",
+        "role": "Deep pine/tea-plantation green for full-bleed dark bands, hero scrim base, footer, and primary display headings on light ground"
       },
       "secondary": {
-        "hex": "#10B981",
-        "role": "Fresh Highland Leaf Green for trust badges, checkmarks, and eco-adventure highlights"
+        "hex": "#1F6B45",
+        "role": "Field green for inline links, check glyphs, route markers, and secondary emphasis on light surfaces"
       },
       "accent": {
-        "hex": "#EA580C",
-        "role": "Warm Terracotta / Sunrise Orange for high-converting WhatsApp CTAs, pricing highlights, and popular badges"
+        "hex": "#C2410C",
+        "role": "Burnt terracotta for every WhatsApp/booking action, price emphasis, and active filter state. Chosen at this darkness so white button text clears 5.2:1"
       },
       "neutral": {
         "scale": [
-          "#F8FAF8",
-          "#F1F5F2",
-          "#E2E8E4",
-          "#CBD5CE",
-          "#64746B",
-          "#334139",
-          "#111C16",
-          "#07120C"
+          "#F4F1EA",
+          "#E7E2D6",
+          "#D3CCBC",
+          "#8A8578",
+          "#5A5F58",
+          "#333A35",
+          "#1B211D",
+          "#101613"
         ],
-        "usage": "Lightest #F8FAF8 for main page canvas, #FFFFFF for elevated cards, #111C16 for primary body text, #64746B for secondary captions"
+        "usage": "Warm paper #F4F1EA is the page canvas; #E7E2D6 is the recessed band and input fill; #D3CCBC and #8A8578 carry hairline rules and captions; #5A5F58 is muted body copy; #333A35 secondary headings; #101613 is the ink used for all primary body and heading text"
       },
       "semantic": {
-        "success": "#059669",
-        "warning": "#D97706",
-        "error": "#DC2626",
-        "info": "#0284C7"
+        "success": "#1F6B45",
+        "warning": "#B45309",
+        "error": "#B91C1C",
+        "info": "#1D4ED8"
       },
       "surface": {
-        "background": "#F8FAF8",
-        "card": "#FFFFFF",
-        "elevated": "#0B3B24"
+        "background": "#F4F1EA",
+        "card": "#FBF9F4",
+        "elevated": "#0E2E20"
       },
-      "contrast_strategy": "High-contrast dark-emerald hero & testimonial sections alternating with crisp warm-white content sections and vibrant terracotta action triggers"
+      "contrast_strategy": "Dark-on-light dominant with two full-bleed pine bands (hero, footer). No tinted boxes for emphasis — emphasis comes from scale, rules, and the single terracotta accent. All body copy clears WCAG AA on paper and on pine."
     },
     "typography": {
       "type_scale": {
         "display": {
-          "size": "clamp(2.25rem, 4.5vw, 3.75rem)",
+          "size": "clamp(2.75rem, 6.2vw, 5.5rem)",
           "weight": "800",
-          "line_height": "1.12",
-          "tracking": "-0.03em"
+          "line_height": "0.94",
+          "tracking": "-0.04em"
         },
         "heading_1": {
-          "size": "clamp(1.875rem, 3.5vw, 2.75rem)",
+          "size": "clamp(2.2rem, 4.2vw, 3.5rem)",
           "weight": "800",
-          "line_height": "1.18",
-          "tracking": "-0.025em"
+          "line_height": "1.0",
+          "tracking": "-0.035em"
         },
         "heading_2": {
-          "size": "clamp(1.5rem, 2.8vw, 2.25rem)",
+          "size": "clamp(1.75rem, 3vw, 2.6rem)",
           "weight": "800",
-          "line_height": "1.22",
-          "tracking": "-0.02em"
+          "line_height": "1.05",
+          "tracking": "-0.03em"
         },
         "heading_3": {
-          "size": "1.25rem",
+          "size": "clamp(1.15rem, 1.6vw, 1.4rem)",
           "weight": "700",
-          "line_height": "1.35",
-          "tracking": "-0.01em"
+          "line_height": "1.2",
+          "tracking": "-0.02em"
         },
         "body": {
           "size": "1rem",
           "weight": "400",
           "line_height": "1.65",
-          "tracking": "0em"
+          "tracking": "-0.005em"
         },
         "body_small": {
           "size": "0.875rem",
-          "weight": "500",
-          "line_height": "1.55",
-          "tracking": "0em"
+          "weight": "400",
+          "line_height": "1.6",
+          "tracking": "0"
         },
         "caption": {
-          "size": "0.75rem",
-          "weight": "600",
-          "line_height": "1.4",
-          "tracking": "0.02em"
+          "size": "0.8125rem",
+          "weight": "500",
+          "line_height": "1.5",
+          "tracking": "0.01em"
         },
         "overline": {
-          "size": "0.75rem",
-          "weight": "800",
+          "size": "0.6875rem",
+          "weight": "700",
           "line_height": "1.2",
-          "tracking": "0.08em"
+          "tracking": "0.14em"
         }
       },
       "font_families": {
-        "heading": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
-        "body": "'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif",
-        "mono": "'JetBrains Mono', monospace"
+        "heading": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+        "body": "'Archivo', 'Helvetica Neue', Arial, sans-serif",
+        "mono": "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace"
       },
-      "font_style_notes": "Geometric-humanist sans-serif ('Plus Jakarta Sans') giving both modern Indonesian travel-tech polish and warm approachability"
+      "font_style_notes": "One grotesque (Archivo) carries both display and body, differentiated only by size, weight, and tracking — this keeps the page coherent and the payload small. JetBrains Mono is reserved for prices, route numbers, section counters, and the legal NIB string, giving the operator-catalogue feel. Display headings use very tight tracking (-0.04em) and sub-1 line-height so they read as a block, not as lines."
     },
     "spacing": {
-      "base_unit": "8px",
-      "scale": ["4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px", "96px"],
+      "base_unit": "4px",
+      "scale": ["4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px", "96px", "128px"],
       "content_density": "comfortable",
-      "section_rhythm": "Generous 80px-96px vertical padding on desktop, 56px on mobile, separated by organic SVG highland wave dividers"
+      "section_rhythm": "Generous 96px vertical rhythm between major blocks on desktop, 56px on mobile. Sections are separated by full-width hairline rules rather than background fills, so the paper ground stays continuous."
     },
     "layout": {
-      "grid_system": "CSS Grid 12-column & responsive auto-fit Bento cards",
-      "max_content_width": "1240px",
-      "columns": 12,
-      "gutter": "24px",
-      "breakpoints": {
-        "sm": "640px",
-        "md": "768px",
-        "lg": "1024px",
-        "xl": "1280px"
-      },
-      "alignment_tendency": "Asymmetric split hero with centered section headers and 3-column bento package grids"
+      "grid_system": "12-column fluid grid with an asymmetric content split (7/5 and 8/4) for hero and lead package blocks",
+      "max_content_width": "1280px",
+      "columns": "12",
+      "gutter": "32px desktop / 20px mobile",
+      "breakpoints": ["480px", "768px", "1024px", "1280px"],
+      "alignment_tendency": "asymmetric — strong left edge, ragged right, occasional right-aligned meta column"
     },
     "shape": {
       "border_radius": {
-        "small": "10px",
-        "medium": "16px",
-        "large": "24px",
-        "pill": "9999px"
+        "small": "2px",
+        "medium": "3px",
+        "large": "4px",
+        "pill": "999px"
       },
-      "border_usage": "Subtle 1px borders (#E2E8E4) on light cards and luminous 1px rgba(255,255,255,0.16) borders on glassmorphism layers",
-      "divider_style": "Layered SVG mountain/tea-hill silhouette waves"
+      "border_usage": "Subtle 1px hairline rules everywhere; 2px rules under active nav and section counters. No bold ornamental borders except the 1px frame around photographs.",
+      "divider_style": "1px solid rgba(16,22,19,0.16) on paper; rgba(255,255,255,0.18) on pine"
     },
     "elevation": {
-      "shadow_style": "layered",
+      "shadow_style": "none",
       "levels": {
-        "low": "0 4px 12px -2px rgba(11, 59, 36, 0.06), 0 2px 6px -1px rgba(11, 59, 36, 0.04)",
-        "medium": "0 16px 32px -8px rgba(11, 59, 36, 0.10), 0 4px 12px -2px rgba(11, 59, 36, 0.05)",
-        "high": "0 24px 48px -12px rgba(11, 59, 36, 0.18), 0 12px 24px -6px rgba(234, 88, 12, 0.12)"
+        "low": "none",
+        "medium": "none",
+        "high": "0 24px 60px rgba(16,22,19,0.18) — reserved exclusively for the lightbox overlay"
       },
-      "depth_cues": "Overlapping photo collages, frosted glass badges over package thumbnails, and elevated featured pricing card"
+      "depth_cues": "overlapping layers, hairline framing, and photographic scrims — never drop shadows"
     },
     "iconography": {
-      "style": "Duotone SVG & crisp rounded line icons",
-      "stroke_weight": "2px",
-      "size_scale": ["16px", "20px", "24px", "32px"],
-      "preferred_set": "Custom inline SVG icons + semantic adventure badges"
+      "style": "thin 1.5px stroke line icons, no filled shapes",
+      "stroke_weight": "1.5px",
+      "size_scale": ["14px", "16px", "20px", "24px"],
+      "preferred_set": "inline Lucide-style SVG paths"
     },
     "motion": {
-      "easing": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
       "duration_scale": {
-        "micro": "180ms",
-        "normal": "350ms",
-        "macro": "700ms"
+        "micro": "140ms",
+        "normal": "260ms",
+        "macro": "600ms"
       },
-      "entrance_pattern": "Staggered fade-up (translateY 24px to 0) triggered via IntersectionObserver",
-      "exit_pattern": "Smooth opacity fade-out (200ms)",
-      "philosophy": "cinematic"
+      "entrance_pattern": "clip-reveal on photographs and a 12px fade-up on text blocks, staggered 60ms by index; triggered once via IntersectionObserver",
+      "exit_pattern": "opacity fade only, no movement",
+      "philosophy": "minimal functional — motion clarifies hierarchy and confirms interaction, never decorates"
     },
     "components": {
-      "button_style": "Pill/rounded-md buttons with gradient terracotta fill, subtle inner highlight, icon prefix, and hover lift + glow",
-      "input_style": "12px rounded inputs with 1.5px border and emerald focus ring",
-      "card_style": "20px rounded photo-header cards with aspect-ratio 16/10 thumbnail, floating glass duration/badge pills, route timeline box, and sticky bottom CTA",
-      "navigation_pattern": "Sticky frosted-glass navbar with official logo, category links, quiz badge, and pulse WhatsApp CTA",
-      "modal_style": "Centered glass-backdrop lightbox for gallery photos and interactive quiz/proposal steps",
-      "list_style": "Custom emerald checkmark pills with bold key inclusions",
-      "component_notes": "Featured 'Paket Terlaris' card scales 1.03x on desktop with a glowing terracotta border and ribbon"
+      "button_style": "Rectangular, 2px radius, 14px Archivo 700 uppercase tracking +0.02em. Primary = ink fill on paper / paper fill on pine. Accent = terracotta fill with white text. Outline = 1px ink rule with transparent fill. No shadows, no translate on hover — background and rule color change only.",
+      "input_style": "Transparent fill on a 1px ink rule, 44px tall, mono value text, label above in 11px uppercase overline; focus thickens the rule to 2px and turns it terracotta",
+      "card_style": "No card chrome. Package entries are separated by hairline rules with a 3:2 photograph on the left (240px) and a text column on the right; hover reveals a terracotta rule on the left edge and underlines the title",
+      "navigation_pattern": "Slim pine utility strip (NIB + location + WhatsApp) above a paper sticky bar; nav items are uppercase overline with a 2px terracotta underline for the active page; dropdown is a paper panel framed by a 1px rule, no shadow",
+      "modal_style": "Full-viewport pine-black scrim at 94% opacity, photograph centered with a 1px white frame, close affordance as an overline label",
+      "list_style": "Facility lists use terracotta plus-sign markers in mono, no bullets, 8px row gap; itinerary lines use a left 2px terracotta rule",
+      "component_notes": "Every component must earn its place: if a border can replace a fill, use the border. Pill badges from the previous design are replaced by mono uppercase labels preceded by a counter (e.g. '01 / JEEP OFFROAD')."
     }
   },
   "design_style": {
     "aesthetic": {
-      "mood": ["adventurous", "trustworthy", "refreshing", "vibrant", "hospitable"],
-      "visual_metaphor": "Morning sunlight breaking through misty Mount Lawu tea plantations before an offroad expedition",
-      "era_influence": "2026 Modern Boutique Travel & Outdoor Experience Platform",
-      "genre": "Eco-Adventure Tourism & Corporate Gathering Concierge",
-      "personality_traits": ["energetic", "reliable", "local-expert", "transparent", "warm"],
-      "adjectives": ["lush", "action-packed", "official", "scenic", "effortless"]
+      "mood": ["rugged", "documentary", "confident", "earthy", "unhurried"],
+      "visual_metaphor": "A printed expedition catalogue pressed flat on a desk — full-bleed trip photography, ruled columns, stamped prices",
+      "era_influence": "1970s national-park field guides crossed with contemporary adventure-travel operator sites",
+      "genre": "editorial adventure travel",
+      "personality_traits": ["experienced", "plain-spoken", "sturdy", "hospitable", "local"],
+      "adjectives": ["bold", "grounded", "editorial", "warm", "legible"]
     },
     "visual_language": {
-      "complexity": "rich",
+      "complexity": "moderate",
       "ornamentation": "subtle accents",
-      "whitespace_usage": "Balanced breathing room around dense, scannable package facility lists",
-      "visual_weight_distribution": "Heavy visual anchor in Hero & 3 Bestseller Cards, followed by structured category showcases",
-      "focal_strategy": "Progressive reveal from Hero collage -> 3 Bestseller Packages -> Interactive Route & Category Explorer -> Social Proof",
-      "contrast_level": "High contrast between deep forest greens, crisp white cards, and fiery orange CTAs",
-      "texture_usage": "Subtle radial mesh glows, frosted glass overlays, and real outdoor adventure photography"
+      "whitespace_usage": "generous but ruled — whitespace is bounded by hairlines so it reads as structure, not emptiness",
+      "visual_weight_distribution": "bottom-heavy photography anchored by a light type block above; each section has one dominant photograph",
+      "focal_strategy": "single hero element",
+      "contrast_level": "high",
+      "texture_usage": "very subtle paper grain on the canvas only; no gradients, no glass"
     },
     "composition": {
-      "hierarchy_method": "Scale contrast + color weight + photographic framing",
+      "hierarchy_method": "scale contrast",
       "balance_type": "asymmetric",
-      "flow_direction": "Z-pattern in hero transitioning to scannable 3-column bento grids",
-      "grouping_strategy": "Card enclosures with distinct header thumbnails, pricing bands, route boxes, and facility checklists",
-      "negative_space_role": "Separates distinct tourism activities (Jeep vs. Outbound vs. Tubing vs. Villa) for effortless comparison"
+      "flow_direction": "left-aligned vertical scroll with a right-hand meta column that answers 'price, duration, capacity' at a glance",
+      "grouping_strategy": "hairline rules and photographic edges group content; background fills are avoided",
+      "negative_space_role": "structural — separates packages and gives the oversized display type room to breathe"
     },
     "imagery": {
-      "photo_treatment": "High-saturation real Kemuning trip photos with subtle bottom gradient scrims for badge legibility and zoom-on-hover",
-      "illustration_style": "Organic SVG mountain & tea-leaf vector accents",
-      "graphic_elements": "Floating NIB legal badges, route stop timeline pills, and 5-star Google review cards",
-      "pattern_usage": "Subtle dot/topographic grid pattern in hero background",
-      "image_shape": "Rounded 16px-20px containers with overflow hidden"
+      "photo_treatment": "Full-bleed, uncropped where possible, natural color and contrast, slight warm grade. Photographs sit flush to the grid with a 1px frame; no rounded corners beyond 4px.",
+      "illustration_style": "none",
+      "graphic_elements": "Hairline rules, mono counters (01 / 02 / 03), and a terracotta square used as a section marker",
+      "pattern_usage": "none",
+      "image_shape": "landscape 3:2 for catalogue rows, 2:1 for featured package, full-bleed 21:9 for the hero"
     },
     "interaction_feel": {
-      "feedback_style": "Immediate visual elevation (-6px translateY) and button shadow intensification",
-      "hover_behavior": "Card lift, thumbnail 1.06x scale zoom, and CTA arrow translation",
+      "feedback_style": "immediate and quiet — rules and text color shift, images scale 1.03",
+      "hover_behavior": "title underline draw-in, terracotta left rule on package rows, image scale on photographs",
       "transition_personality": "smooth glide",
-      "loading_style": "Instant SSR rendering with progressive scroll-reveal",
-      "microinteraction_density": "Moderate and purposeful — focused on package comparison, gallery filtering, and WhatsApp conversion"
+      "loading_style": "progressive — paper background holds the layout with no skeletons or spinners",
+      "microinteraction_density": "low"
     },
     "brand_voice_in_ui": {
-      "tone": "Friendly, enthusiastic local guide backed by formal CV corporate credibility",
-      "formality": "Semi-formal (casual-warm for families, structured and legal-ready with NIB & PDF proposals for corporate committees)",
-      "cta_style": "Direct action-oriented invitation ('Booking Cepat via WA', 'Unduh Proposal PDF Resmi')",
-      "empty_state_approach": "Helpful direct WhatsApp consultation prompt",
-      "error_tone": "Polite, clear, and solution-oriented"
+      "tone": "plain-spoken field guide — says what the trip is, who it suits, and what it costs",
+      "formality": "semi-formal with local warmth",
+      "cta_style": "direct imperative",
+      "empty_state_approach": "state the constraint plainly and offer the WhatsApp fallback",
+      "error_tone": "direct, no blame, always offers a next step"
     }
   },
   "visual_effects": {
     "overview": {
-      "effect_intensity": "moderate",
-      "performance_tier": "medium",
-      "fallback_strategy": "reduce to CSS",
-      "primary_technology": "Canvas 2D"
+      "effect_intensity": "subtle-accent",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "disable effects — all content renders fully with CSS only; scroll reveals are additive and elements are visible by default when the observer is unavailable",
+      "primary_technology": "CSS only"
     },
     "background_effects": {
-      "type": "mesh-gradient",
-      "description": "Layered radial emerald and warm sunlight mesh gradients behind the hero and CTA sections",
-      "technology": "CSS radial-gradient + Canvas 2D overlay",
+      "type": "none",
+      "description": "Flat warm paper canvas with a barely-perceptible inline SVG grain overlay at 3% opacity on the body only. No gradients, no animated backgrounds.",
+      "technology": "CSS + inline SVG data URI",
       "params": {
-        "color_palette": ["#071E12", "#0B3B24", "#155E3B", "#EA580C"],
-        "speed": "slow",
-        "density": "medium",
-        "opacity": "0.85",
-        "blend_mode": "screen"
+        "color_palette": ["#F4F1EA", "#E7E2D6"],
+        "speed": "static",
+        "density": "sparse",
+        "opacity": 0.03,
+        "blend_mode": "multiply"
       }
     },
     "particle_systems": {
-      "enabled": true,
-      "type": "fireflies",
-      "description": "Floating morning mist motes and golden sunlight particles drifting across the Kemuning highland hero section",
-      "technology": "Canvas 2D",
+      "enabled": false,
+      "type": "none",
+      "description": "Explicitly removed from the previous build. A tourism operator site does not benefit from ambient particles.",
+      "technology": "none",
       "params": {
-        "count": 45,
-        "shape": "circle",
-        "size_range": [1.5, 4.5],
-        "movement_pattern": "gentle upward and lateral drift with sine-wave oscillation",
-        "color_behavior": "Warm gold (#FBBF24) and soft emerald mist (#A7F3D0) with pulsing alpha",
-        "interaction": "mouse-repel",
-        "spawn_area": "full hero canvas"
+        "count": 0,
+        "shape": "none",
+        "size_range": "0",
+        "movement_pattern": "none",
+        "color_behavior": "none",
+        "interaction": "none",
+        "spawn_area": "none"
       }
     },
     "3d_elements": {
       "enabled": false,
       "type": "none",
-      "description": "Not used to preserve instant mobile load speed on shared hosting",
+      "description": "No 3D. The photographs carry the experience.",
       "technology": "none",
       "params": {
         "renderer": "none",
@@ -266,17 +261,17 @@
         "camera": "none",
         "materials": "none",
         "geometry": "none",
-        "post_processing": [],
+        "post_processing": "none",
         "interaction_model": "none"
       }
     },
     "shader_effects": {
       "enabled": false,
       "type": "none",
-      "description": "Not used",
+      "description": "No shaders.",
       "technology": "none",
       "params": {
-        "uniforms": [],
+        "uniforms": "none",
         "vertex_manipulation": "none",
         "fragment_output": "none",
         "noise_type": "none",
@@ -285,91 +280,92 @@
     },
     "scroll_effects": {
       "parallax": {
-        "enabled": true,
-        "layers": "2",
-        "depth_range": "0.15 to 0.3",
-        "speed_curve": "linear"
+        "enabled": false,
+        "layers": "1",
+        "depth_range": "none",
+        "speed_curve": "none"
       },
       "scroll_triggered_animations": {
         "enabled": true,
-        "trigger_points": "15% viewport intersection",
+        "trigger_points": "section entry at 15% visibility",
         "animation_type": "fade-up",
-        "scrub_behavior": "triggered"
+        "scrub_behavior": "triggered — plays once, 12px rise and opacity 0 to 1, 600ms cubic-bezier(0.16,1,0.3,1), 60ms stagger per sibling"
       },
       "scroll_morphing": {
         "enabled": false,
-        "description": "None"
+        "description": "none"
       }
     },
     "text_effects": {
-      "type": "gradient-fill",
-      "description": "Golden-emerald gradient text highlight on key hero headline words",
-      "technology": "CSS background-clip: text",
+      "type": "none",
+      "description": "No split-text or typewriter effects. Display type is static; only the underline on hover animates.",
+      "technology": "CSS",
       "params": {
-        "split_strategy": "by-word",
-        "animation_per_unit": "shimmer",
-        "stagger": "0ms",
-        "effect_style": "linear-gradient(135deg, #FDE68A 0%, #34D399 50%, #F97316 100%)"
+        "split_strategy": "none",
+        "animation_per_unit": "none",
+        "stagger": "none",
+        "effect_style": "none"
       }
     },
     "cursor_effects": {
       "enabled": false,
       "type": "none",
-      "description": "Disabled as primary audience is mobile/tablet WhatsApp bookers",
+      "description": "System cursor retained; usability over novelty.",
       "params": {
         "shape": "none",
-        "size": "0",
-        "blend_mode": "normal",
+        "size": "none",
+        "blend_mode": "none",
         "trail": "none",
         "interaction_zone": "none"
       }
     },
     "image_effects": {
-      "type": "parallax-tilt",
-      "description": "Smooth 1.06x image scale zoom on card hover with gradient overlay reveal and interactive lightbox zoom",
-      "technology": "CSS transform + Vanilla JS lightbox",
+      "type": "reveal-clip",
+      "description": "Photographs reveal with a clip-path wipe from the bottom edge on first scroll entry, then settle to 1.03 scale on hover over 600ms. No distortion, no filters beyond a uniform slight contrast/grade.",
+      "technology": "CSS clip-path + transform, via IntersectionObserver class toggle",
       "params": {
-        "filter_pipeline": "contrast(1.03) saturate(1.05)",
-        "hover_transform": "scale(1.06)",
-        "reveal_animation": "fade-up",
+        "filter_pipeline": "contrast(1.04) saturate(1.02)",
+        "hover_transform": "scale(1.03) over 600ms cubic-bezier(0.16,1,0.3,1)",
+        "reveal_animation": "clip-path inset(100% 0 0 0) to inset(0) over 700ms",
         "distortion_type": "none"
       }
     },
     "glassmorphism_neumorphism": {
-      "enabled": true,
-      "style": "glass",
+      "enabled": false,
+      "style": "none",
       "params": {
-        "blur_radius": "16px",
-        "transparency": "0.85",
-        "border_treatment": "1px solid rgba(255, 255, 255, 0.22)",
-        "shadow_type": "0 8px 32px rgba(7, 18, 12, 0.15)",
-        "light_source_angle": "135deg"
+        "blur_radius": "0",
+        "transparency": "0",
+        "border_treatment": "none",
+        "shadow_type": "none",
+        "light_source_angle": "none"
       }
     },
     "canvas_drawings": {
-      "enabled": true,
-      "type": "interactive-blobs",
-      "description": "Hero Canvas 2D floating highland mist & sun-motes with mouse-repel physics",
-      "technology": "Canvas 2D",
+      "enabled": false,
+      "type": "none",
+      "description": "No canvas. The prior mist-particle canvas was removed for performance and because it fought the documentary tone.",
+      "technology": "none",
       "params": {
-        "draw_method": "arc + radialGradient",
-        "animation_loop": "requestAnimationFrame",
-        "color_scheme": ["#FBBF24", "#A7F3D0", "#FFFFFF"],
-        "responsiveness": "ResizeObserver",
-        "interaction": "pointermove repel"
+        "draw_method": "none",
+        "animation_loop": "none",
+        "color_scheme": "none",
+        "responsiveness": "none",
+        "interaction": "none"
       }
     },
     "svg_animations": {
       "enabled": true,
-      "type": "decorative-loop",
-      "description": "Layered SVG mountain/tea-plantation wave dividers and pulsing WhatsApp status indicator",
+      "type": "path-draw",
+      "description": "The single decorative element: a 1px route line in the hero-detail that draws itself on first view. Also used for the FAQ plus/minus rotation.",
+      "technology": "CSS stroke-dashoffset",
       "params": {
-        "animation_method": "CSS keyframes",
+        "animation_method": "stroke-dashoffset from path length to 0 over 900ms",
         "path_morphing": "none",
-        "stroke_animation": "pulse ring",
-        "filter_effects": "drop-shadow"
+        "stroke_animation": "1px stroke, terracotta, non-scaling",
+        "filter_effects": "none"
       }
     },
-    "composite_notes": "Combines fast server-side rendered HTML with lightweight Canvas 2D atmospheric particles in the hero, real WebP trip photography on every card, category filter tabs on the homepage, and an interactive photo lightbox for the documentation gallery."
+    "composite_notes": "The visual language deliberately withholds effects. Three rules govern everything: (1) no shadow may appear except the lightbox; (2) no element may have a radius above 4px except the pill-shaped nothing — pills are removed entirely; (3) accent terracotta is permitted on at most two elements per viewport. Scroll reveals and the clip-path photographic wipe are the only motion beyond hover; both are disabled under prefers-reduced-motion and content is visible by default if IntersectionObserver is missing."
   }
 }
