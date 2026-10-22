@@ -1,0 +1,31 @@
+/* Kemuning Signature Theme: Tea Emerald & Terracotta */
+:root {
+  --primary: #0F3F28;
+  --primary-light: #155E3B;
+  --primary-dark: #092618;
+  --accent: #EA580C;
+  --accent-hover: #C2410C;
+  --bg-page: #F8FAF8;
+  --text-dark: #1F2937;
+  --text-muted: #4B5563;
+  --border: #E5E7EB;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-page); color: var(--text-dark); line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+.header-nav { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50; }
+.btn-primary { background: var(--primary-light); color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:hover { background: var(--primary); }
+.btn-accent { background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; }
+.btn-accent:hover { background: var(--accent-hover); }
+.badge-trust { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 99px; }
+.card-package { background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.card-package:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+.sticky-bottom-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--border); padding: 12px 16px; display: flex; gap: 10px; z-index: 99; box-shadow: 0 -4px 12px rgba(0,0,0,0.05); }
+.hidden { display: none !important; }
+@media (min-width: 768px) {
+  .nav-desktop { display: flex !important; }
+  #mobile-menu-btn { display: none !important; }
+  .sticky-bottom-cta { display: none !important; }
+}
