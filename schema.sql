@@ -1,0 +1,87 @@
+CREATE TABLE IF NOT EXISTS categories (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    slug VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT NULL,
+    icon VARCHAR(50) DEFAULT 'fas fa-map-marked-alt',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS packages (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    category_id INTEGER NOT NULL,
+    name VARCHAR(200) NOT NULL,
+    slug VARCHAR(200) NOT NULL UNIQUE,
+    price INTEGER NOT NULL DEFAULT 0,
+    price_strike INTEGER DEFAULT 0,
+    price_type VARCHAR(50) DEFAULT 'per_orang',
+    min_participants INTEGER DEFAULT 1,
+    duration VARCHAR(100) NULL,
+    badge VARCHAR(50) NULL,
+    summary TEXT NULL,
+    inclusions TEXT NULL,
+    exclusions TEXT NULL,
+    itinerary TEXT NULL,
+    thumbnail VARCHAR(255) NULL,
+    is_active INTEGER DEFAULT 1,
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS articles (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) NOT NULL UNIQUE,
+    content LONGTEXT NOT NULL,
+    thumbnail VARCHAR(255) NULL,
+    meta_title VARCHAR(255) NULL,
+    meta_description VARCHAR(255) NULL,
+    focus_keyword VARCHAR(100) NULL,
+    views INTEGER DEFAULT 0,
+    status VARCHAR(50) DEFAULT 'published',
+    published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS galleries (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    category_tag VARCHAR(50) DEFAULT 'jeep',
+    sort_order INTEGER DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS leads_log (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    event_type VARCHAR(50) NOT NULL,
+    lead_name VARCHAR(150) NULL,
+    lead_phone VARCHAR(50) NULL,
+    institution VARCHAR(150) NULL,
+    package_name VARCHAR(200) NULL,
+    participants INTEGER DEFAULT 0,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent VARCHAR(255) NULL,
+    traffic_source VARCHAR(100) DEFAULT 'Direct',
+    utm_source VARCHAR(100) NULL,
+    utm_medium VARCHAR(100) NULL,
+    utm_campaign VARCHAR(100) NULL,
+    gclid VARCHAR(255) NULL,
+    status VARCHAR(50) DEFAULT 'new',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS settings (
+    setting_key VARCHAR(100) PRIMARY KEY,
+    setting_value TEXT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS admin_users (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) NOT NULL,
+    last_login DATETIME NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
