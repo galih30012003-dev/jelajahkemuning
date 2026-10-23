@@ -37,13 +37,21 @@
                 <div class="field">
                     <label for="pf-package">Pilihan paket wisata</label>
                     <select id="pf-package" name="package_name" class="qf-input on-paper">
-                        <option value="Paket Combo Terlaris (Jeep + Outbound + Tubing)">Paket Combo Terlaris (Jeep + Outbound + Tubing - Rp 185.000/org)</option>
-                        <option value="Paket Seru 3 (Outbound + River Tubing)">Paket Seru 3 (Outbound + River Tubing - Rp 130.000/org)</option>
-                        <option value="Super Combo (Jeep Medium + Outbound + Tubing)">Super Combo (Jeep Medium + Outbound + Tubing - Rp 210.000/org)</option>
-                        <option value="Paket Outbound Basic Fun Games">Paket Outbound Basic Fun Games (Rp 80.000/org)</option>
-                        <option value="Jeep Special 1 Offroad Kali & Kebun Teh">Jeep Special 1 Offroad Kali & Kebun Teh (Rp 450.000/armada)</option>
-                        <option value="Paket Hemat Jeep Short (Include Makan)">Paket Hemat Jeep Short Inc. Makan (Rp 150.000/org)</option>
-                        <option value="Paket Menginap Villa Kebun Teh 2D1N">Paket Menginap Villa Kebun Teh 2D1N (Rp 350.000/org)</option>
+                        <?php if (!empty($packages)): ?>
+                            <?php foreach ($packages as $pkg): ?>
+                            <option value="<?= htmlspecialchars($pkg['name']) ?>">
+                                <?= htmlspecialchars($pkg['name']) ?> (<?= Helpers::formatRupiah($pkg['price']) ?> / <?= $pkg['price_type'] === 'per_armada' ? 'armada' : 'org' ?>)
+                            </option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="Paket Combo Terlaris (Jeep + Outbound + Tubing)">Paket Combo Terlaris (Jeep + Outbound + Tubing - Rp 185.000/org)</option>
+                            <option value="Paket Seru 3 (Outbound + River Tubing)">Paket Seru 3 (Outbound + River Tubing - Rp 130.000/org)</option>
+                            <option value="Super Combo (Jeep Medium + Outbound + Tubing)">Super Combo (Jeep Medium + Outbound + Tubing - Rp 210.000/org)</option>
+                            <option value="Paket Outbound Basic Fun Games">Paket Outbound Basic Fun Games (Rp 80.000/org)</option>
+                            <option value="Jeep Special 1 Offroad Kali & Kebun Teh">Jeep Special 1 Offroad Kali & Kebun Teh (Rp 450.000/armada)</option>
+                            <option value="Paket Hemat Jeep Short (Include Makan)">Paket Hemat Jeep Short Inc. Makan (Rp 150.000/org)</option>
+                            <option value="Paket Menginap Villa Kebun Teh 2D1N">Paket Menginap Villa Kebun Teh 2D1N (Rp 350.000/org)</option>
+                        <?php endif; ?>
                     </select>
                 </div>
 
