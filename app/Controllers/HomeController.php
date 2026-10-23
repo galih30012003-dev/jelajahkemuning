@@ -83,6 +83,10 @@ class HomeController {
 
         $pageTitle = 'Paket Wisata Kemuning - Jeep Adventure, Outbound & River Tubing Karanganyar';
         $pageDesc = 'Pusat paket wisata Kemuning resmi CV Jelajah Kemuning. Melayani Jeep Offroad Kebun Teh, River Tubing, Outbound Gathering Kantor, dan Sewa Villa berizin resmi NIB & asuransi.';
+        $pageCanonical = Helpers::canonicalUrl('/');
+        $pageSchemas = [
+            Helpers::buildFaqSchema($faqs)
+        ];
 
         require __DIR__ . '/../Views/layouts/header.php';
         require __DIR__ . '/../Views/home.php';

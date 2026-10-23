@@ -43,6 +43,16 @@ class PackageController {
 
         $pageTitle = $category['name'] . ' - Paket Wisata Jelajah Kemuning';
         $pageDesc = $category['description'] ?? 'Pilihan paket ' . $category['name'] . ' resmi CV Jelajah Kemuning Karanganyar.';
+        $pageCanonical = Helpers::canonicalUrl('/' . $slug . '/');
+        $pageOgImage = !empty($packages[0]['thumbnail']) ? $packages[0]['thumbnail'] : null;
+
+        $pageSchemas = [
+            Helpers::buildBreadcrumbSchema([
+                'Beranda' => '/',
+                $category['name'] => '/' . $slug . '/'
+            ]),
+            Helpers::buildPackageListSchema($packages, $category['name'], $pageCanonical)
+        ];
 
         require __DIR__ . '/../Views/layouts/header.php';
         require __DIR__ . '/../Views/package-detail.php';

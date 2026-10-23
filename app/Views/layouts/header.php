@@ -1,6 +1,16 @@
 <?php
 $siteTitle = $pageTitle ?? 'Paket Wisata Kemuning - Jeep, Outbound & River Tubing Karanganyar';
 $siteDesc = $pageDesc ?? 'Penyedia paket wisata resmi CV Jelajah Kemuning. Melayani Jeep Offroad, River Tubing, Outbound Kantor, dan Sewa Villa Glamping berizin resmi & berasuransi.';
+$baseUrl = Helpers::baseUrl();
+$canonicalUrl = $pageCanonical ?? Helpers::canonicalUrl();
+$ogTitle = $pageOgTitle ?? $siteTitle;
+$ogDesc = $pageOgDesc ?? $siteDesc;
+$ogType = $pageOgType ?? 'website';
+$ogImage = $pageOgImage ?? ($baseUrl . '/assets/uploads/Foto-paket-jeep-adventure-kemuning.webp');
+if (!str_starts_with($ogImage, 'http')) {
+    $ogImage = $baseUrl . '/' . ltrim($ogImage, '/');
+}
+
 $rawGtmId = Helpers::getSetting('gtm_id');
 $gtmId = preg_replace('/[^A-Za-z0-9-]/', '', $rawGtmId);
 $waPhone = Helpers::getSetting('no_wa_1', defined('DEFAULT_WA') ? DEFAULT_WA : '6285171001566');
@@ -21,6 +31,42 @@ $isActive = static function (array $prefixes) use ($currentPath): string {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= Helpers::sanitize($siteTitle) ?></title>
     <meta name="description" content="<?= Helpers::sanitize($siteDesc) ?>">
+    <link rel="canonical" href="<?= Helpers::sanitize($canonicalUrl) ?>">
+
+    <!-- Open Graph / WhatsApp Preview -->
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:type" content="<?= Helpers::sanitize($ogType) ?>">
+    <meta property="og:site_name" content="Jelajah Kemuning">
+    <meta property="og:title" content="<?= Helpers::sanitize($ogTitle) ?>">
+    <meta property="og:description" content="<?= Helpers::sanitize($ogDesc) ?>">
+    <meta property="og:url" content="<?= Helpers::sanitize($canonicalUrl) ?>">
+    <meta property="og:image" content="<?= Helpers::sanitize($ogImage) ?>">
+    <meta property="og:image:secure_url" content="<?= Helpers::sanitize($ogImage) ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="<?= Helpers::sanitize($ogTitle) ?>">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= Helpers::sanitize($ogTitle) ?>">
+    <meta name="twitter:description" content="<?= Helpers::sanitize($ogDesc) ?>">
+    <meta name="twitter:image" content="<?= Helpers::sanitize($ogImage) ?>">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    <?= json_encode(Helpers::buildTravelAgencySchema(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+    </script>
+
+    <?php if (!empty($pageSchemas) && is_array($pageSchemas)): ?>
+        <?php foreach ($pageSchemas as $sch): ?>
+            <?php if (!empty($sch)): ?>
+            <script type="application/ld+json">
+            <?= json_encode($sch, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+            </script>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/assets/css/style.min.css">

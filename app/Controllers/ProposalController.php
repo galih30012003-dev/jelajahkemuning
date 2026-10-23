@@ -8,6 +8,13 @@ class ProposalController {
     public function index(): void {
         $pageTitle = 'Download Proposal Penawaran Resmi - CV Jelajah Kemuning';
         $pageDesc = 'Buat surat penawaran dan proposal resmi berkop CV Jelajah Kemuning untuk rombongan kantor, dinas, atau komunitas secara otomatis.';
+        $pageCanonical = Helpers::canonicalUrl('/proposal/');
+        $pageSchemas = [
+            Helpers::buildBreadcrumbSchema([
+                'Beranda' => '/',
+                'Proposal Wisata' => '/proposal/'
+            ])
+        ];
 
         try {
             $db = Database::getInstance()->getConnection();

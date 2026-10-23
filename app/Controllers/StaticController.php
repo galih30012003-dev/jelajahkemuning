@@ -7,12 +7,27 @@ class StaticController {
             $galleries = $db->query("SELECT * FROM galleries ORDER BY sort_order ASC, id DESC")->fetchAll(PDO::FETCH_ASSOC);
             $pageTitle = 'Galeri Dokumentasi Wisata - Jelajah Kemuning';
             $pageDesc = 'Dokumentasi asli keseruan Jeep Adventure, River Tubing, dan Gathering Outbound di Kemuning Karanganyar.';
+            $pageCanonical = Helpers::canonicalUrl('/galeri/');
+            $pageSchemas = [
+                Helpers::buildBreadcrumbSchema([
+                    'Beranda' => '/',
+                    'Galeri' => '/galeri/'
+                ])
+            ];
             require __DIR__ . '/../Views/layouts/header.php';
             require __DIR__ . '/../Views/gallery.php';
             require __DIR__ . '/../Views/layouts/footer.php';
         } elseif ($page === 'kontak' || $page === 'tentang-kami') {
+            $titleName = ($page === 'kontak') ? 'Kontak & Lokasi' : 'Tentang Kami';
             $pageTitle = ($page === 'kontak') ? 'Kontak & Lokasi - Jelajah Kemuning' : 'Tentang Kami - CV Jelajah Kemuning';
             $pageDesc = 'Hubungi admin CV Jelajah Kemuning untuk reservasi paket wisata, alamat meeting point terminal wisata Kemuning, Karanganyar.';
+            $pageCanonical = Helpers::canonicalUrl('/' . $page . '/');
+            $pageSchemas = [
+                Helpers::buildBreadcrumbSchema([
+                    'Beranda' => '/',
+                    $titleName => '/' . $page . '/'
+                ])
+            ];
             require __DIR__ . '/../Views/layouts/header.php';
             require __DIR__ . '/../Views/contact.php';
             require __DIR__ . '/../Views/layouts/footer.php';

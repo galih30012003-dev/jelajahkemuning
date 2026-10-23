@@ -24,6 +24,13 @@ class ArticleController {
         $articles = $this->getPublishedArticles();
         $pageTitle = 'Artikel & Panduan Wisata Kemuning Karanganyar';
         $pageDesc = 'Tips liburan, rute jeep, rekomendasi kuliner, dan panduan wisata lengkap di Kemuning Karanganyar.';
+        $pageCanonical = Helpers::canonicalUrl('/artikel/');
+        $pageSchemas = [
+            Helpers::buildBreadcrumbSchema([
+                'Beranda' => '/',
+                'Artikel' => '/artikel/'
+            ])
+        ];
 
         require __DIR__ . '/../Views/layouts/header.php';
         require __DIR__ . '/../Views/articles.php';
@@ -43,6 +50,18 @@ class ArticleController {
 
         $pageTitle = $article['meta_title'] ?: $article['title'] . ' - Jelajah Kemuning';
         $pageDesc = $article['meta_description'] ?: substr(strip_tags($article['content']), 0, 160);
+        $pageCanonical = Helpers::canonicalUrl('/artikel/' . $slug . '/');
+        $pageOgType = 'article';
+        $pageOgImage = !empty($article['thumbnail']) ? $article['thumbnail'] : null;
+
+        $pageSchemas = [
+            Helpers::buildBreadcrumbSchema([
+                'Beranda' => '/',
+                'Artikel' => '/artikel/',
+                $article['title'] => '/artikel/' . $slug . '/'
+            ]),
+            Helpers::buildArticleSchema($article, $pageCanonical)
+        ];
 
         require __DIR__ . '/../Views/layouts/header.php';
         require __DIR__ . '/../Views/article-detail.php';

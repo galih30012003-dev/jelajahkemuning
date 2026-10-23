@@ -35,6 +35,13 @@ class QuizController {
     public function index(): void {
         $pageTitle = 'Smart Package Finder - Kuis Temukan Paket Wisata Kemuning Terbaik';
         $pageDesc = 'Gunakan fitur kuis interaktif JelajahKemuning.com untuk mendapatkan rekomendasi paket wisata & estimasi biaya rombongan secara instan.';
+        $pageCanonical = Helpers::canonicalUrl('/cari-paket/');
+        $pageSchemas = [
+            Helpers::buildBreadcrumbSchema([
+                'Beranda' => '/',
+                'Kuis Paket' => '/cari-paket/'
+            ])
+        ];
 
         require __DIR__ . '/../Views/layouts/header.php';
         require __DIR__ . '/../Views/quiz.php';
