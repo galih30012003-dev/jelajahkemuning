@@ -7,72 +7,82 @@ $pkgCount = $db->query("SELECT COUNT(*) FROM packages")->fetchColumn();
 $artCount = $db->query("SELECT COUNT(*) FROM articles")->fetchColumn();
 $leadCount = $db->query("SELECT COUNT(*) FROM leads_log")->fetchColumn();
 $recentLeads = $db->query("SELECT * FROM leads_log ORDER BY id DESC LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+
+$activePage = 'index';
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Jelajah Kemuning</title>
     <link rel="stylesheet" href="/assets/css/style.min.css">
 </head>
-<body style="background:#F9FAFB;">
-    <div style="background:var(--primary); color:#fff; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
-        <strong>🌿 Admin Jelajah Kemuning</strong>
-        <div style="display:flex; gap:16px; font-size:14px;">
-            <a href="/admin/index.php">Dashboard</a>
-            <a href="/admin/paket.php">Paket & Harga</a>
-            <a href="/admin/artikel.php">Artikel SEO</a>
-            <a href="/admin/leads.php">Leads & GCLID</a>
-            <a href="/admin/settings.php">Pengaturan</a>
-            <a href="/" target="_blank">Lihat Web ↗</a>
-            <a href="/admin/logout.php" style="color:#FCA5A5;">Keluar</a>
-        </div>
-    </div>
+<body class="admin-body">
+    <?php require __DIR__ . '/_nav.php'; ?>
 
-    <div class="container" style="padding:32px 16px;">
-        <h1 style="font-size:1.75rem; font-weight:800; margin-bottom:24px;">Ringkasan Sistem</h1>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:32px;">
-            <div style="background:#fff; padding:20px; border-radius:10px; border:1px solid #E5E7EB;">
-                <div style="color:#6B7280; font-size:13px;">Total Paket Wisata</div>
-                <div style="font-size:28px; font-weight:800; color:var(--primary);"><?= $pkgCount ?></div>
+    <main class="container" style="padding-top:32px; padding-bottom:64px;">
+        <div class="admin-page-head">
+            <div>
+                <h1 class="admin-page-title">Ringkasan Sistem</h1>
+                <p class="admin-page-sub">Status data paket, artikel blog, dan performa konversi leads</p>
             </div>
-            <div style="background:#fff; padding:20px; border-radius:10px; border:1px solid #E5E7EB;">
-                <div style="color:#6B7280; font-size:13px;">Artikel Blog SEO</div>
-                <div style="font-size:28px; font-weight:800; color:var(--primary);"><?= $artCount ?></div>
-            </div>
-            <div style="background:#fff; padding:20px; border-radius:10px; border:1px solid #E5E7EB;">
-                <div style="color:#6B7280; font-size:13px;">Total Lead & Konversi</div>
-                <div style="font-size:28px; font-weight:800; color:var(--accent);"><?= $leadCount ?></div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="/admin/paket.php" class="btn btn-primary" style="font-size:12px; padding:8px 14px;">+ Kelola Paket</a>
+                <a href="/admin/artikel.php" class="btn btn-outline" style="font-size:12px; padding:8px 14px;">+ Tulis Artikel</a>
             </div>
         </div>
 
-        <div style="background:#fff; border-radius:10px; border:1px solid #E5E7EB; padding:24px;">
-            <h3 style="font-size:16px; font-weight:700; margin-bottom:16px;">5 Lead Terbaru Masuk</h3>
-            <table style="width:100%; border-collapse:collapse; font-size:13px;">
-                <thead>
-                    <tr style="background:#F9FAFB; text-align:left; border-bottom:1px solid #E5E7EB;">
-                        <th style="padding:10px;">Waktu</th>
-                        <th style="padding:10px;">Event</th>
-                        <th style="padding:10px;">Nama / Instansi</th>
-                        <th style="padding:10px;">Sumber</th>
-                        <th style="padding:10px;">GCLID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (empty($recentLeads)): ?>
-                    <tr><td colspan="5" style="padding:16px; text-align:center; color:#9CA3AF;">Belum ada lead masuk.</td></tr>
-                    <?php else: foreach ($recentLeads as $ld): ?>
-                    <tr style="border-bottom:1px solid #F3F4F6;">
-                        <td style="padding:10px;"><?= $ld['created_at'] ?></td>
-                        <td style="padding:10px;"><strong><?= htmlspecialchars($ld['event_type']) ?></strong></td>
-                        <td style="padding:10px;"><?= htmlspecialchars($ld['institution'] ?: $ld['lead_name'] ?: '-') ?></td>
-                        <td style="padding:10px;"><?= htmlspecialchars($ld['traffic_source']) ?></td>
-                        <td style="padding:10px; font-family:monospace;"><?= htmlspecialchars(substr($ld['gclid'] ?? '-', 0, 15)) ?>...</td>
-                    </tr>
-                    <?php endforeach; endif; ?>
-                </tbody>
-            </table>
+        <div class="admin-stat-grid">
+            <div class="admin-stat-card">
+                <div class="admin-stat-label">Total Paket Wisata</div>
+                <div class="admin-stat-value"><?= $pkgCount ?></div>
+            </div>
+            <div class="admin-stat-card">
+                <div class="admin-stat-label">Artikel Blog SEO</div>
+                <div class="admin-stat-value"><?= $artCount ?></div>
+            </div>
+            <div class="admin-stat-card accent">
+                <div class="admin-stat-label">Total Lead &amp; Konversi</div>
+                <div class="admin-stat-value"><?= $leadCount ?></div>
+            </div>
         </div>
-    </div>
+
+        <div class="admin-card" style="padding:0; overflow:hidden;">
+            <div style="padding:18px 20px; border-bottom:1px solid var(--rule); display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <h2 style="font-size:15px; font-weight:700; color:var(--ink); margin:0;">5 Lead Terbaru Masuk</h2>
+                    <p style="font-size:12px; color:var(--ink-muted); margin:2px 0 0;">Pengunjung yang mengirim form proposal atau klik chat WhatsApp</p>
+                </div>
+                <a href="/admin/leads.php" class="btn-ghost" style="font-size:11px;">Semua lead →</a>
+            </div>
+            <div class="admin-table-wrap" style="border:none;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>Event</th>
+                            <th>Nama / Instansi</th>
+                            <th>Sumber Traffic</th>
+                            <th>Google Click ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (empty($recentLeads)): ?>
+                        <tr><td colspan="5" style="padding:32px; text-align:center; color:var(--ink-faint);">Belum ada lead masuk.</td></tr>
+                        <?php else: foreach ($recentLeads as $ld): ?>
+                        <tr>
+                            <td class="mono" style="font-size:11.5px;"><?= $ld['created_at'] ?></td>
+                            <td><strong style="color:var(--ink);"><?= htmlspecialchars($ld['event_type']) ?></strong></td>
+                            <td><?= htmlspecialchars($ld['institution'] ?: $ld['lead_name'] ?: '-') ?></td>
+                            <td><span class="admin-badge active"><?= htmlspecialchars($ld['traffic_source']) ?></span></td>
+                            <td class="mono" style="font-size:11px; color:var(--ink-muted);"><?= htmlspecialchars(substr($ld['gclid'] ?? '-', 0, 16)) ?><?= strlen($ld['gclid'] ?? '') > 16 ? '…' : '' ?></td>
+                        </tr>
+                        <?php endforeach; endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

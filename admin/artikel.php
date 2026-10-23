@@ -44,84 +44,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $articles = $db->query("SELECT * FROM articles ORDER BY published_at DESC")->fetchAll(PDO::FETCH_ASSOC);
+
+$activePage = 'artikel';
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelola Artikel Blog & SEO - Admin Jelajah Kemuning</title>
     <link rel="stylesheet" href="/assets/css/style.min.css">
 </head>
-<body style="background:#F9FAFB;">
-    <div style="background:var(--primary); color:#fff; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
-        <strong>🌿 Admin Jelajah Kemuning</strong>
-        <div style="display:flex; gap:16px; font-size:14px;">
-            <a href="/admin/index.php">Dashboard</a>
-            <a href="/admin/paket.php">Paket & Harga</a>
-            <a href="/admin/artikel.php" style="font-weight:700; text-decoration:underline;">Artikel SEO</a>
-            <a href="/admin/galeri.php">Galeri</a>
-            <a href="/admin/leads.php">Leads & GCLID</a>
-            <a href="/admin/settings.php">Pengaturan</a>
-            <a href="/" target="_blank">Lihat Web ↗</a>
-            <a href="/admin/logout.php" style="color:#FCA5A5;">Keluar</a>
-        </div>
-    </div>
+<body class="admin-body">
+    <?php require __DIR__ . '/_nav.php'; ?>
 
-    <div class="container" style="padding:32px 16px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-            <h1 style="font-size:1.75rem; font-weight:800;">Artikel Blog & Optimasi SEO</h1>
-            <button onclick="openNewArticle()" class="btn-accent">+ Tulis Artikel Baru</button>
+    <main class="container" style="padding-top:32px; padding-bottom:64px;">
+        <div class="admin-page-head">
+            <div>
+                <h1 class="admin-page-title">Artikel Blog &amp; Optimasi SEO</h1>
+                <p class="admin-page-sub">Tulis panduan wisata, kelola meta title, keyword, dan tinjau cuplikan Google SERP</p>
+            </div>
+            <button onclick="openNewArticle()" class="btn btn-accent">+ Tulis Artikel Baru</button>
         </div>
 
         <?php if ($message): ?>
-        <div style="background:#ECFDF5; color:#047857; padding:12px; border-radius:8px; margin-bottom:16px;">
+        <div style="background:#ECFDF5; color:#065F46; border-left:3px solid #10B981; padding:12px 16px; font-size:13px; margin-bottom:20px;">
             ✓ <?= htmlspecialchars($message) ?>
         </div>
         <?php endif; ?>
 
         <?php if ($error): ?>
-        <div style="background:#FEE2E2; color:#B91C1C; padding:12px; border-radius:8px; margin-bottom:16px;">
+        <div style="background:#FEF2F2; color:#B91C1C; border-left:3px solid #EF4444; padding:12px 16px; font-size:13px; margin-bottom:20px;">
             ✕ <?= htmlspecialchars($error) ?>
         </div>
         <?php endif; ?>
 
-        <div style="background:#fff; border-radius:12px; border:1px solid #E5E7EB; overflow-x:auto;">
-            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+        <div class="admin-table-wrap">
+            <table class="admin-table">
                 <thead>
-                    <tr style="background:#F9FAFB; text-align:left; border-bottom:1px solid #E5E7EB;">
-                        <th style="padding:12px 16px;">Judul Artikel</th>
-                        <th style="padding:12px 16px;">Focus Keyword</th>
-                        <th style="padding:12px 16px;">Views</th>
-                        <th style="padding:12px 16px;">Status</th>
-                        <th style="padding:12px 16px;">Tanggal</th>
-                        <th style="padding:12px 16px; text-align:right;">Aksi</th>
+                    <tr>
+                        <th>Judul Artikel</th>
+                        <th>Focus Keyword</th>
+                        <th>Views</th>
+                        <th>Status</th>
+                        <th>Tanggal</th>
+                        <th style="text-align:right;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($articles)): ?>
-                    <tr><td colspan="6" style="padding:24px; text-align:center; color:#9CA3AF;">Belum ada artikel yang ditulis.</td></tr>
+                    <tr><td colspan="6" style="padding:32px; text-align:center; color:var(--ink-faint);">Belum ada artikel yang ditulis.</td></tr>
                     <?php else: foreach ($articles as $art): ?>
-                    <tr style="border-bottom:1px solid #F3F4F6;">
-                        <td style="padding:12px 16px; font-weight:700;">
-                            <a href="/artikel/<?= htmlspecialchars($art['slug']) ?>/" target="_blank" style="color:var(--primary);">
-                                <?= htmlspecialchars($art['title']) ?> ↗
+                    <tr>
+                        <td style="font-weight:700;">
+                            <a href="/artikel/<?= htmlspecialchars($art['slug']) ?>/" target="_blank" style="color:var(--pine); text-decoration:none;">
+                                <?= htmlspecialchars($art['title']) ?> <span style="font-size:11px; color:var(--ink-faint);">↗</span>
                             </a>
                         </td>
-                        <td style="padding:12px 16px; font-family:monospace;"><?= htmlspecialchars($art['focus_keyword'] ?: '-') ?></td>
-                        <td style="padding:12px 16px;"><?= $art['views'] ?></td>
-                        <td style="padding:12px 16px;">
-                            <span style="font-size:12px; padding:2px 8px; border-radius:99px; background:<?= $art['status'] === 'published' ? '#ECFDF5; color:#047857;' : '#F3F4F6; color:#6B7280;' ?>">
+                        <td class="mono" style="font-size:11px;"><?= htmlspecialchars($art['focus_keyword'] ?: '-') ?></td>
+                        <td class="mono" style="font-size:12px;"><?= $art['views'] ?></td>
+                        <td>
+                            <span class="admin-badge <?= $art['status'] === 'published' ? 'active' : 'inactive' ?>">
                                 <?= htmlspecialchars($art['status']) ?>
                             </span>
                         </td>
-                        <td style="padding:12px 16px; color:#6B7280; font-size:13px;"><?= date('d M Y', strtotime($art['published_at'])) ?></td>
-                        <td style="padding:12px 16px; text-align:right;">
-                            <button onclick='editArticle(<?= json_encode($art) ?>)' style="background:none; border:none; color:var(--primary); cursor:pointer; font-size:13px; font-weight:700; margin-right:12px;">Edit</button>
+                        <td class="mono" style="font-size:11px; color:var(--ink-muted);"><?= date('d.m.Y', strtotime($art['published_at'])) ?></td>
+                        <td style="text-align:right; white-space:nowrap;">
+                            <button onclick='editArticle(<?= json_encode($art) ?>)' class="admin-btn-action edit">Edit</button>
                             <form method="POST" style="display:inline;" onsubmit="return confirm('Hapus artikel ini?')">
                                 <input type="hidden" name="csrf" value="<?= Auth::generateCsrf() ?>">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="id" value="<?= $art['id'] ?>">
-                                <button type="submit" style="background:none; border:none; color:#EF4444; cursor:pointer; font-size:13px; font-weight:600;">Hapus</button>
+                                <button type="submit" class="admin-btn-action delete">Hapus</button>
                             </form>
                         </td>
                     </tr>
@@ -129,14 +123,15 @@ $articles = $db->query("SELECT * FROM articles ORDER BY published_at DESC")->fet
                 </tbody>
             </table>
         </div>
-    </div>
+    </main>
 
     <!-- Modal Add/Edit Article -->
-    <div id="modal-add" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:999;">
-        <div style="background:#fff; border-radius:12px; padding:24px; width:100%; max-width:700px; max-height:90vh; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                <h3 id="art-modal-title" style="font-size:18px; font-weight:800;">Tulis Artikel Blog & Cek Skor SEO</h3>
-                <button onclick="document.getElementById('modal-add').classList.add('hidden')" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
+    <div id="modal-add" class="hidden" style="position:fixed; inset:0; background:rgba(14,46,32,0.7); display:flex; align-items:center; justify-content:center; z-index:999; padding:20px;">
+        <div style="background:#fff; border:1px solid var(--rule); border-top:3px solid var(--ink); border-radius:var(--radius-sm); padding:28px 24px; width:100%; max-width:700px; max-height:90vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+                <h3 id="art-modal-title" style="font-family:var(--font-display); font-size:1.2rem; font-weight:800; color:var(--ink); margin:0;">Tulis Artikel Blog &amp; Cek Skor SEO</h3>
+                <button onclick="document.getElementById('modal-add').classList.add('hidden')" style="background:none; border:none; font-size:18px; cursor:pointer; color:var(--ink-faint);">✕</button>
+            </div>
             </div>
             <form method="POST">
                 <input type="hidden" name="csrf" value="<?= Auth::generateCsrf() ?>">

@@ -76,6 +76,19 @@ switch ($uri) {
         require_once __DIR__ . '/sitemap.php';
         break;
 
+    case '/admin':
+        header('Location: /admin/index.php');
+        exit;
+
+    case (preg_match('#^/admin/([a-zA-Z0-9_-]+)$#', $uri, $matches) ? true : false):
+        $adminFile = __DIR__ . '/admin/' . $matches[1] . '.php';
+        if (is_file($adminFile)) {
+            require $adminFile;
+            exit;
+        }
+        http_response_code(404);
+        break;
+
     default:
         http_response_code(404);
         $pageTitle = 'Halaman Tidak Ditemukan - Jelajah Kemuning';

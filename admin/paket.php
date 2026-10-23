@@ -49,82 +49,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $categories = $db->query("SELECT * FROM categories ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
 $packages = $db->query("SELECT p.*, c.name as category_name FROM packages p JOIN categories c ON p.category_id = c.id ORDER BY c.name ASC, p.sort_order ASC, p.price ASC")->fetchAll(PDO::FETCH_ASSOC);
+$activePage = 'paket';
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelola Paket Wisata - Admin Jelajah Kemuning</title>
     <link rel="stylesheet" href="/assets/css/style.min.css">
 </head>
-<body style="background:#F9FAFB;">
-    <div style="background:var(--primary); color:#fff; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
-        <strong>🌿 Admin Jelajah Kemuning</strong>
-        <div style="display:flex; gap:16px; font-size:14px;">
-            <a href="/admin/index.php">Dashboard</a>
-            <a href="/admin/paket.php" style="font-weight:700; text-decoration:underline;">Paket & Harga</a>
-            <a href="/admin/artikel.php">Artikel SEO</a>
-            <a href="/admin/galeri.php">Galeri</a>
-            <a href="/admin/leads.php">Leads & GCLID</a>
-            <a href="/admin/settings.php">Pengaturan</a>
-            <a href="/" target="_blank">Lihat Web ↗</a>
-            <a href="/admin/logout.php" style="color:#FCA5A5;">Keluar</a>
-        </div>
-    </div>
+<body class="admin-body">
+    <?php require __DIR__ . '/_nav.php'; ?>
 
-    <div class="container" style="padding:32px 16px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-            <h1 style="font-size:1.75rem; font-weight:800;">Kelola Paket & Harga Wisata</h1>
-            <button onclick="document.getElementById('modal-add').classList.remove('hidden')" class="btn-accent">+ Tambah Paket Baru</button>
+    <main class="container" style="padding-top:32px; padding-bottom:64px;">
+        <div class="admin-page-head">
+            <div>
+                <h1 class="admin-page-title">Kelola Paket &amp; Harga Wisata</h1>
+                <p class="admin-page-sub">Tambah, ubah harga, rute, fasilitas, dan kelola ketersediaan paket</p>
+            </div>
+            <button onclick="document.getElementById('modal-add').classList.remove('hidden')" class="btn btn-accent">+ Tambah Paket Baru</button>
         </div>
 
         <?php if ($message): ?>
-        <div style="background:#ECFDF5; color:#047857; padding:12px; border-radius:8px; margin-bottom:16px;">
+        <div style="background:#ECFDF5; color:#065F46; border-left:3px solid #10B981; padding:12px 16px; font-size:13px; margin-bottom:20px;">
             ✓ <?= htmlspecialchars($message) ?>
         </div>
         <?php endif; ?>
 
         <?php if ($error): ?>
-        <div style="background:#FEE2E2; color:#B91C1C; padding:12px; border-radius:8px; margin-bottom:16px;">
+        <div style="background:#FEF2F2; color:#B91C1C; border-left:3px solid #EF4444; padding:12px 16px; font-size:13px; margin-bottom:20px;">
             ✕ <?= htmlspecialchars($error) ?>
         </div>
         <?php endif; ?>
 
-        <div style="background:#fff; border-radius:12px; border:1px solid #E5E7EB; overflow-x:auto;">
-            <table style="width:100%; border-collapse:collapse; font-size:14px;">
+        <div class="admin-table-wrap">
+            <table class="admin-table">
                 <thead>
-                    <tr style="background:#F9FAFB; text-align:left; border-bottom:1px solid #E5E7EB;">
-                        <th style="padding:12px 16px;">Kategori</th>
-                        <th style="padding:12px 16px;">Nama Paket</th>
-                        <th style="padding:12px 16px;">Harga</th>
-                        <th style="padding:12px 16px;">Tipe</th>
-                        <th style="padding:12px 16px;">Badge</th>
-                        <th style="padding:12px 16px;">Status</th>
-                        <th style="padding:12px 16px; text-align:right;">Aksi</th>
+                    <tr>
+                        <th>Kategori</th>
+                        <th>Nama Paket</th>
+                        <th>Harga</th>
+                        <th>Tipe</th>
+                        <th>Badge</th>
+                        <th>Status</th>
+                        <th style="text-align:right;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (empty($packages)): ?>
-                    <tr><td colspan="7" style="padding:24px; text-align:center; color:#9CA3AF;">Belum ada paket wisata.</td></tr>
+                    <tr><td colspan="7" style="padding:32px; text-align:center; color:var(--ink-faint);">Belum ada paket wisata.</td></tr>
                     <?php else: foreach ($packages as $pkg): ?>
-                    <tr style="border-bottom:1px solid #F3F4F6;">
-                        <td style="padding:12px 16px; font-weight:600; color:var(--primary);"><?= htmlspecialchars($pkg['category_name']) ?></td>
-                        <td style="padding:12px 16px; font-weight:700;"><?= htmlspecialchars($pkg['name']) ?></td>
-                        <td style="padding:12px 16px; font-weight:700; color:var(--accent);"><?= Helpers::formatRupiah($pkg['price']) ?></td>
-                        <td style="padding:12px 16px;"><?= $pkg['price_type'] === 'per_armada' ? 'Per Armada' : 'Per Orang' ?></td>
-                        <td style="padding:12px 16px;"><?= htmlspecialchars($pkg['badge'] ?: '-') ?></td>
-                        <td style="padding:12px 16px;">
-                            <span style="font-size:12px; padding:2px 8px; border-radius:99px; background:<?= $pkg['is_active'] ? '#ECFDF5; color:#047857;' : '#F3F4F6; color:#6B7280;' ?>">
+                    <tr>
+                        <td style="font-weight:600; color:var(--pine);"><?= htmlspecialchars($pkg['category_name']) ?></td>
+                        <td style="font-weight:700; color:var(--ink);"><?= htmlspecialchars($pkg['name']) ?></td>
+                        <td class="mono" style="font-weight:600; color:var(--accent); font-size:13.5px;"><?= Helpers::formatRupiah($pkg['price']) ?></td>
+                        <td class="mono" style="font-size:11.5px;"><?= $pkg['price_type'] === 'per_armada' ? 'Per Jeep' : 'Per Orang' ?></td>
+                        <td>
+                            <?php if ($pkg['badge']): ?>
+                            <span class="mono" style="font-size:9.5px; padding:2px 6px; background:rgba(194,65,12,0.1); color:var(--accent); font-weight:600; text-transform:uppercase; letter-spacing:0.08em;"><?= htmlspecialchars($pkg['badge']) ?></span>
+                            <?php else: ?>
+                            <span style="color:var(--ink-faint);">-</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <span class="admin-badge <?= $pkg['is_active'] ? 'active' : 'inactive' ?>">
                                 <?= $pkg['is_active'] ? 'Aktif' : 'Non-aktif' ?>
                             </span>
                         </td>
-                        <td style="padding:12px 16px; text-align:right;">
-                            <button onclick='editPackage(<?= json_encode($pkg) ?>)' style="background:none; border:none; color:var(--primary); cursor:pointer; font-size:13px; font-weight:700; margin-right:12px;">Edit</button>
+                        <td style="text-align:right; white-space:nowrap;">
+                            <button onclick='editPackage(<?= json_encode($pkg) ?>)' class="admin-btn-action edit">Edit</button>
                             <form method="POST" style="display:inline;" onsubmit="return confirm('Hapus paket ini?')">
                                 <input type="hidden" name="csrf" value="<?= Auth::generateCsrf() ?>">
                                 <input type="hidden" name="action" value="delete">
                                 <input type="hidden" name="id" value="<?= $pkg['id'] ?>">
-                                <button type="submit" style="background:none; border:none; color:#EF4444; cursor:pointer; font-size:13px; font-weight:600;">Hapus</button>
+                                <button type="submit" class="admin-btn-action delete">Hapus</button>
                             </form>
                         </td>
                     </tr>
@@ -132,14 +131,14 @@ $packages = $db->query("SELECT p.*, c.name as category_name FROM packages p JOIN
                 </tbody>
             </table>
         </div>
-    </div>
+    </main>
 
     <!-- Modal Form (Add & Edit) -->
-    <div id="modal-add" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:999;">
-        <div style="background:#fff; border-radius:12px; padding:24px; width:100%; max-width:550px; max-height:90vh; overflow-y:auto;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-                <h3 id="modal-title" style="font-size:18px; font-weight:800;">Tambah Paket Wisata</h3>
-                <button onclick="document.getElementById('modal-add').classList.add('hidden')" style="background:none; border:none; font-size:20px; cursor:pointer;">✕</button>
+    <div id="modal-add" class="hidden" style="position:fixed; inset:0; background:rgba(14,46,32,0.7); display:flex; align-items:center; justify-content:center; z-index:999; padding:20px;">
+        <div style="background:#fff; border:1px solid var(--rule); border-top:3px solid var(--ink); border-radius:var(--radius-sm); padding:28px 24px; width:100%; max-width:550px; max-height:90vh; overflow-y:auto;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; padding-bottom:12px; border-bottom:1px solid var(--rule);">
+                <h3 id="modal-title" style="font-family:var(--font-display); font-size:1.2rem; font-weight:800; color:var(--ink); margin:0;">Tambah Paket Wisata</h3>
+                <button onclick="document.getElementById('modal-add').classList.add('hidden')" style="background:none; border:none; font-size:18px; cursor:pointer; color:var(--ink-faint);">✕</button>
             </div>
             <form method="POST" id="package-form">
                 <input type="hidden" name="csrf" value="<?= Auth::generateCsrf() ?>">

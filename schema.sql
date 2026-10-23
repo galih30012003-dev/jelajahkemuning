@@ -172,6 +172,6 @@ INSERT INTO settings (setting_key, setting_value) VALUES
 ('bank_info', 'BCA 1234567890 a.n CV Jelajah Kemuning'),
 ('alamat', 'Terminal Wisata Kemuning, Kec. Ngargoyoso, Kabupaten Karanganyar, Jawa Tengah 57793');
 
--- SEED DATA: ADMIN DEFAULT
+-- SEED DATA: ADMIN DEFAULT (Default: admin / admin123)
 INSERT INTO admin_users (username, password_hash, full_name, email) VALUES
-('admin', '$2y$10$wTf4R6Vw0y8Pq7Oq9bA1b.KkL0iK4FjG8O7Q5k4V1l2b3N4m5O6p.', 'Admin Jelajah Kemuning', 'admin@jelajahkemuning.com');
+('admin', '$2y$10$Yd7Gwp7GfLd3XFocbiS4L.NO/5jHVzw8Ei9Gf/tdn/u5C2xShBuuy', 'Admin Jelajah Kemuning', 'admin@jelajahkemuning.com');
